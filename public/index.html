@@ -1,0 +1,2792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNSAAC - Plataforma de Gestión del TUPA</title>
+  
+  <!-- Premium Typography: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* -------------------------------------------------------------
+       DESIGN SYSTEM (Vanilla CSS with Modern Aesthetics)
+       Theme: Premium Slate Dark Mode with Neon Ultraviolet and Cyan accents
+       ------------------------------------------------------------- */
+    :root {
+      --bg-base: #F7F1F2;
+      --bg-surface: rgba(255, 255, 255, 0.95);
+      --bg-surface-opaque: #FFFFFF;
+      --bg-card: rgba(255, 255, 255, 0.90);
+      --border-glow: rgba(123, 24, 40, 0.15);
+      --border-color: rgba(123, 24, 40, 0.10);
+
+      --color-primary: #7B1828; /* Guinda UNSAAC */
+      --color-primary-glow: rgba(123, 24, 40, 0.30);
+      --color-secondary: #A52035; /* Guinda claro */
+      --color-secondary-glow: rgba(165, 32, 53, 0.20);
+      --color-success: #16a34a;
+      --color-warning: #d97706;
+      --color-danger: #dc2626;
+
+      --text-main: #1C0A0E;
+      --text-muted: #7A3040;
+      --text-glow: #2D1018;
+
+      --shadow-premium: 0 8px 32px 0 rgba(123, 24, 40, 0.10);
+      --shadow-glow: 0 0 20px rgba(123, 24, 40, 0.08);
+
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-primary) #F0E8EA;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F0E8EA;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-primary);
+      border-radius: 3px;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(123, 24, 40, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(123, 24, 40, 0.03) 0%, transparent 45%);
+    }
+
+    /* -------------------------------------------------------------
+       LAYOUT UTILITIES
+       ------------------------------------------------------------- */
+    .glow-header {
+      background: #7B1828;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(123, 24, 40, 0.30);
+    }
+
+    .brand-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      box-shadow: 0 0 15px var(--color-primary-glow);
+    }
+
+    .brand-info h1 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: linear-gradient(to right, #ffffff, #f5d0d8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-info p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.70);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .portal-toggle {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 30px;
+      padding: 0.25rem;
+      display: flex;
+      gap: 0.25rem;
+      box-shadow: var(--shadow-premium);
+    }
+
+    .toggle-btn {
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.80);
+      padding: 0.5rem 1.25rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      font-family: var(--font-display);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition-smooth);
+    }
+
+    .toggle-btn.active {
+      background: #FFFFFF;
+      color: #7B1828;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.20);
+    }
+
+    /* Core container */
+    .app-main {
+      display: flex;
+      flex: 1;
+      position: relative;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 250px;
+      border-right: 1px solid var(--border-color);
+      background: #FFFFFF;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      box-shadow: 2px 0 8px rgba(123,24,40,0.05);
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      border: 1px solid transparent;
+    }
+
+    .nav-item:hover {
+      background: rgba(123, 24, 40, 0.05);
+      color: var(--color-primary);
+    }
+
+    .nav-item.active {
+      background: rgba(123, 24, 40, 0.09);
+      border-color: rgba(123, 24, 40, 0.25);
+      color: var(--color-primary);
+      font-weight: 600;
+      box-shadow: inset 0 0 12px rgba(123, 24, 40, 0.05);
+    }
+
+    /* Content Area */
+    .content-viewport {
+      flex: 1;
+      padding: 2.5rem;
+      overflow-y: auto;
+      height: calc(100vh - 70px);
+    }
+
+    /* Glass Panels */
+    .glass-panel {
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow-premium);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    }
+
+    /* Titles & Typography */
+    h2.section-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #7B1828 30%, #A52035 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    p.section-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    /* -------------------------------------------------------------
+       COMPONENT: TUPA CATALOG & SEARCH
+       ------------------------------------------------------------- */
+    .search-bar-container {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      flex: 1;
+    }
+
+    .search-input-wrapper i {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--border-color);
+      padding: 1rem 1rem 1rem 3rem;
+      border-radius: 14px;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      transition: var(--transition-smooth);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 15px rgba(123, 24, 40, 0.15);
+    }
+
+    .filter-select {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0 1.5rem;
+      border-radius: 14px;
+      font-weight: 500;
+      outline: none;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .filter-select:focus {
+      border-color: var(--color-primary);
+    }
+
+    /* Catalog Cards Grid */
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .catalog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .catalog-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(123, 24, 40, 0.35);
+      box-shadow: 0 10px 25px rgba(123,24,40,0.12), 0 0 15px rgba(123, 24, 40, 0.08);
+    }
+
+    .card-header-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .procedure-code {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      background: rgba(123, 24, 40, 0.08);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .procedure-office {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(123, 24, 40, 0.05);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 150px;
+    }
+
+    .procedure-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text-main);
+      margin-top: 0.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 2.8rem;
+    }
+
+    .procedure-description {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(123,24,40,0.08);
+      padding-top: 1rem;
+    }
+
+    .monto-badge {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--color-success);
+    }
+
+    .btn-card-action {
+      background: rgba(123, 24, 40, 0.08);
+      border: 1px solid rgba(123, 24, 40, 0.20);
+      color: var(--color-primary);
+      padding: 0.4rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: var(--transition-smooth);
+    }
+
+    .catalog-card:hover .btn-card-action {
+      background: var(--color-primary);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(123, 24, 40, 0.25);
+    }
+
+    /* -------------------------------------------------------------
+       COMPONENT: MODALS / DETAIL VIEWS
+       ------------------------------------------------------------- */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(28, 10, 14, 0.65);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-smooth);
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-container {
+      background: var(--bg-surface-opaque);
+      border: 1px solid rgba(123, 24, 40, 0.12);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 680px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      transform: scale(0.9);
+      transition: var(--transition-smooth);
+    }
+
+    .modal-overlay.open .modal-container {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      padding: 0.2rem;
+    }
+
+    .modal-close:hover {
+      color: var(--color-primary);
+    }
+
+    .modal-body {
+      padding: 2rem;
+    }
+
+    .detail-section-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid rgba(123,24,40,0.10);
+      padding-bottom: 0.5rem;
+    }
+
+    .requisite-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .requisite-list li {
+      background: rgba(123, 24, 40, 0.03);
+      border-left: 3px solid var(--color-primary);
+      padding: 0.85rem 1.2rem;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--text-main);
+    }
+
+    .cost-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.85rem;
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px dashed rgba(16, 185, 129, 0.2);
+      padding: 1.25rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .cost-label {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .cost-value {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--color-success);
+      font-size: 1.15rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.5rem;
+    }
+
+    .btn {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: rgba(123, 24, 40, 0.06);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(123, 24, 40, 0.12);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: #fff;
+      box-shadow: 0 4px 15px var(--color-primary-glow);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(123, 24, 40, 0.40);
+      transform: translateY(-2px);
+    }
+
+    .btn-tertiary {
+      background: rgba(123, 24, 40, 0.06);
+      color: var(--color-primary);
+      border: 1px solid rgba(123, 24, 40, 0.25);
+    }
+
+    .btn-tertiary:hover {
+      background: rgba(123, 24, 40, 0.12);
+      transform: translateY(-1px);
+    }
+
+    /* -------------------------------------------------------------
+       COMPONENT: TRÁMITE REGISTRATION FORM
+       ------------------------------------------------------------- */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .input-control {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+    }
+
+    .input-control:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 10px rgba(123, 24, 40, 0.12);
+    }
+
+    /* Dropzone Upload */
+    .dropzone-container {
+      border: 2px dashed rgba(123, 24, 40, 0.30);
+      background: rgba(123, 24, 40, 0.02);
+      border-radius: 14px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .dropzone-container:hover {
+      border-color: var(--color-primary);
+      background: rgba(123, 24, 40, 0.04);
+    }
+
+    .dropzone-icon {
+      font-size: 2.2rem;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+      transition: var(--transition-smooth);
+    }
+
+    .dropzone-container:hover .dropzone-icon {
+      transform: translateY(-5px);
+      color: var(--color-secondary);
+    }
+
+    .dropzone-text h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+    }
+
+    .dropzone-text p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .payment-method-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    .payment-method-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(123, 24, 40, 0.12);
+      border-radius: 16px;
+      padding: 1rem;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      min-height: 120px;
+      text-align: left;
+    }
+
+    .payment-method-card.active,
+    .payment-method-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 20px rgba(123, 24, 40, 0.15);
+      background: rgba(123, 24, 40, 0.05);
+    }
+
+    .payment-method-card h4 {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--text-main);
+    }
+
+    .payment-method-card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .payment-method-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(123, 24, 40, 0.08);
+      color: var(--color-primary);
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .payment-method-details {
+      background: rgba(247, 241, 242, 0.90);
+      border: 1px solid rgba(123, 24, 40, 0.10);
+      border-radius: 16px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .payment-method-details ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--text-muted);
+    }
+
+    .payment-confirmation-panel {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 16px;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+      color: #e9f7ef;
+    }
+
+    .payment-confirmation-panel strong {
+      color: #fff;
+    }
+
+    .uploaded-files-list {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .file-badge {
+      background: rgba(123,24,40,0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .file-name {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .file-name i {
+      color: var(--color-primary);
+    }
+
+    .btn-remove-file {
+      background: transparent;
+      border: none;
+      color: var(--color-danger);
+      cursor: pointer;
+    }
+
+    /* -------------------------------------------------------------
+       COMPONENT: PROCEDURE TRACKING TIMELINE
+       ------------------------------------------------------------- */
+    .tracking-search {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .tracking-timeline {
+      margin-top: 2rem;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .tracking-timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(123, 24, 40, 0.15);
+    }
+
+    .timeline-step {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-node {
+      position: absolute;
+      left: -27px;
+      top: 3px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg-base);
+      border: 3px solid var(--text-muted);
+      transition: var(--transition-smooth);
+    }
+
+    .timeline-step.active .timeline-node {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 10px var(--color-primary-glow);
+    }
+
+    .timeline-step.completed .timeline-node {
+      border-color: var(--color-success);
+      background: var(--color-success);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+
+    .timeline-content {
+      background: rgba(255, 255, 255, 0.90);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: var(--transition-smooth);
+    }
+
+    .timeline-step.active .timeline-content {
+      background: rgba(123, 24, 40, 0.04);
+      border-color: rgba(123, 24, 40, 0.22);
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .timeline-time {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .timeline-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* -------------------------------------------------------------
+       COMPONENT: ADMIN DASHBOARD CARDS & STATS
+       ------------------------------------------------------------- */
+    .stat-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      position: relative;
+    }
+
+    .stat-icon-wrapper {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .stat-icon-wrapper.purple { background: rgba(123, 24, 40, 0.10); color: var(--color-primary); }
+    .stat-icon-wrapper.cyan { background: rgba(165, 32, 53, 0.08); color: var(--color-secondary); }
+    .stat-icon-wrapper.green { background: rgba(22, 163, 74, 0.10); color: var(--color-success); }
+    .stat-icon-wrapper.amber { background: rgba(217, 119, 6, 0.10); color: var(--color-warning); }
+
+    .stat-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .stat-info p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Admin Procedures Table */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      background: #FFFFFF;
+    }
+
+    .premium-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .premium-table th {
+      background: var(--color-primary);
+      padding: 1rem 1.25rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: #fff;
+      border-bottom: 1px solid rgba(123,24,40,0.20);
+    }
+
+    .premium-table td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    .premium-table tr:hover {
+      background: rgba(123, 24, 40, 0.03);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+    }
+
+    .status-badge.solicitado { background: rgba(123,24,40,0.10); color: var(--color-primary); }
+    .status-badge.en_proceso { background: rgba(217,119,6,0.12); color: var(--color-warning); }
+    .status-badge.pagado { background: rgba(165,32,53,0.10); color: var(--color-secondary); }
+    .status-badge.cerrado { background: rgba(22,163,74,0.12); color: var(--color-success); }
+    .status-badge.anulado { background: rgba(220,38,38,0.12); color: var(--color-danger); }
+
+    .btn-action-icon {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-action-icon:hover {
+      color: #fff;
+      border-color: var(--color-primary);
+      background: var(--color-primary);
+    }
+
+    /* Charts & Statistics Section */
+    .admin-analytics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .chart-panel {
+      background: rgba(255, 255, 255, 0.90);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 1.5rem;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .chart-panel h4 {
+      font-family: var(--font-display);
+      color: var(--text-main);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-container-mock {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 180px;
+      padding-top: 1rem;
+      border-bottom: 2px solid rgba(123,24,40,0.12);
+      position: relative;
+    }
+
+    .chart-bar-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .chart-bar {
+      width: 30px;
+      border-radius: 6px 6px 0 0;
+      background: linear-gradient(to top, var(--color-primary), var(--color-secondary));
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .chart-bar::after {
+      content: attr(data-val);
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .chart-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      white-space: nowrap;
+      max-width: 70px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .donut-chart-mock {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      height: 180px;
+    }
+
+    .donut-graphic {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--color-primary) 0% 45%,
+        var(--color-secondary) 45% 70%,
+        var(--color-success) 70% 90%,
+        var(--color-warning) 90% 100%
+      );
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .donut-inner {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--bg-surface-opaque);
+    }
+
+    .donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .legend-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    /* -------------------------------------------------------------
+       ANIMATIONS
+       ------------------------------------------------------------- */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(123, 24, 40, 0.40); }
+      70% { box-shadow: 0 0 0 8px rgba(123, 24, 40, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(123, 24, 40, 0); }
+    }
+
+    .pulse-node {
+      animation: pulse 2s infinite;
+    }
+
+    /* Tab Transition classes */
+    .tab-view {
+      display: none;
+    }
+
+    .tab-view.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Premium Header Navbar -->
+  <header class="glow-header">
+    <div class="brand-container">
+      <div class="brand-logo">U</div>
+      <div class="brand-info">
+        <h1>UNSAAC TUPA</h1>
+        <p>Gestión de Procedimientos Administrativos</p>
+      </div>
+    </div>
+    
+    <div class="portal-toggle">
+      <button class="toggle-btn active" id="btn-student-view" onclick="switchPortal('student')">
+        <i class="fa-solid fa-user-graduate"></i> Estudiantes
+      </button>
+      <button class="toggle-btn" id="btn-admin-view" onclick="switchPortal('admin')">
+        <i class="fa-solid fa-user-tie"></i> Oficinas UNSAAC
+      </button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <!-- Student Links -->
+      <div id="student-nav-group">
+        <div class="nav-item active" onclick="switchTab('student-catalog')" data-tab="student-catalog">
+          <i class="fa-solid fa-book-open"></i> Catálogo TUPA
+        </div>
+        <div class="nav-item" onclick="switchTab('student-submit')" data-tab="student-submit">
+          <i class="fa-solid fa-file-signature"></i> Iniciar Trámite
+        </div>
+        <div class="nav-item" onclick="openPaymentModal()">
+          <i class="fa-solid fa-money-bill-transfer"></i> Pasarela de Pagos
+        </div>
+        <div class="nav-item" onclick="switchTab('student-track')" data-tab="student-track">
+          <i class="fa-solid fa-route"></i> Trazabilidad / Rastro
+        </div>
+      </div>
+      
+      <!-- Admin Links -->
+      <div id="admin-nav-group" style="display:none;">
+        <div class="nav-item active" onclick="switchTab('admin-dashboard')" data-tab="admin-dashboard">
+          <i class="fa-solid fa-chart-pie"></i> Panel General
+        </div>
+        <div class="nav-item" onclick="switchTab('admin-requests')" data-tab="admin-requests">
+          <i class="fa-solid fa-file-invoice"></i> Bandeja de Trámites
+        </div>
+        <div class="nav-item" onclick="switchTab('admin-reports')" data-tab="admin-reports">
+          <i class="fa-solid fa-file-excel"></i> Analíticas / Reportes
+        </div>
+        <div class="nav-item" id="admin-session-info" style="cursor:default; opacity:0.75; font-size:0.8rem;"></div>
+        <div class="nav-item" onclick="handleAdminLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Frame -->
+    <section class="content-viewport">
+
+      <!-- ==========================================
+           STUDENT VIEWS
+           ========================================== -->
+      
+      <!-- TAB 1: TUPA CATALOG -->
+      <div class="tab-view active" id="student-catalog">
+        <div class="glass-panel">
+          <h2 class="section-title"><i class="fa-solid fa-magnifying-glass"></i> Catálogo de Trámites TUPA</h2>
+          <p class="section-subtitle">Busca y consulta en tiempo real los requisitos oficiales, tasas, costos y dependencias responsables de los trámites del Texto Único de Procedimientos Administrativos de la UNSAAC.</p>
+          
+          <div class="search-bar-container">
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-search"></i>
+              <input type="text" class="search-input" id="catalog-search-box" oninput="filterCatalog()" placeholder="Busca por denominación del trámite, palabra clave o código (e.g. matrícula, carné, grado)...">
+            </div>
+            <select class="filter-select" id="catalog-office-filter" onchange="filterCatalog()">
+              <option value="">Todas las Oficinas</option>
+            </select>
+          </div>
+
+          <div class="catalog-grid" id="catalog-cards-container">
+            <!-- Dynamic catalog cards go here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: INITIATE TRAMITE FORM -->
+      <div class="tab-view" id="student-submit">
+        <div class="glass-panel">
+          <h2 class="section-title"><i class="fa-solid fa-paper-plane"></i> Formulario de Solicitud de Trámite Digital</h2>
+          <p class="section-subtitle">Completa tus datos personales, adjunta la documentación solicitada y registra tu comprobante de pago bancario para iniciar la validación de tu trámite digital en la UNSAAC.</p>
+
+          <form id="submit-tramite-form" onsubmit="handleTramiteSubmission(event)">
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="submit-tramite-select">Selecciona el Trámite TUPA a Iniciar</label>
+                <select class="input-control" id="submit-tramite-select" onchange="updateFormRequisites()" required>
+                  <!-- Dynamically populated from catalog -->
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="student-code">Código de Estudiante (UNSAAC) <span style="font-weight:400; color:var(--text-muted);">(opcional)</span></label>
+                <input type="text" class="input-control" id="student-code" placeholder="Ej. 211048" maxlength="15">
+              </div>
+
+              <div class="form-group">
+                <label for="student-dni">DNI / Documento de Identidad</label>
+                <input type="text" class="input-control" id="student-dni" placeholder="Ej. 74382910" required maxlength="8" pattern="\d{8}" title="8 dígitos">
+              </div>
+
+              <div class="form-group">
+                <label for="student-names">Nombres</label>
+                <input type="text" class="input-control" id="student-names" placeholder="Ej. Juan Carlos" required>
+              </div>
+
+              <div class="form-group">
+                <label for="student-apellido-paterno">Apellido Paterno</label>
+                <input type="text" class="input-control" id="student-apellido-paterno" placeholder="Ej. Quispe" required>
+              </div>
+
+              <div class="form-group">
+                <label for="student-apellido-materno">Apellido Materno</label>
+                <input type="text" class="input-control" id="student-apellido-materno" placeholder="Ej. Condori">
+              </div>
+
+              <div class="form-group">
+                <label for="student-email">Correo Electrónico</label>
+                <input type="email" class="input-control" id="student-email" placeholder="Ej. juan.quispe@unsaac.edu.pe" required>
+              </div>
+
+              <div class="form-group">
+                <label for="student-phone">Teléfono / Celular</label>
+                <input type="text" class="input-control" id="student-phone" placeholder="Ej. 984729182" required maxlength="9">
+              </div>
+            </div>
+
+            <!-- Requisites Dynamic checklist -->
+            <div class="detail-section-title"><i class="fa-solid fa-clipboard-check"></i> Requisitos Obligatorios a Adjuntar</div>
+            <div class="requisite-list" id="form-requisite-checklist" style="margin-bottom: 1.5rem;">
+              <!-- Dynamically populated checklist -->
+            </div>
+
+            <!-- Upload dropzone -->
+            <div class="dropzone-container" onclick="triggerFileInput()">
+              <input type="file" id="form-file-input" style="display:none;" onchange="handleFileSelected(event)" multiple>
+              <div class="dropzone-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+              <div class="dropzone-text">
+                <h4>Arrastra tus documentos o haz clic aquí</h4>
+                <p>Formatos permitidos: PDF, JPG, PNG (Max 15MB por archivo)</p>
+              </div>
+            </div>
+
+            <div class="uploaded-files-list" id="uploaded-files-container">
+              <!-- Uploaded filesbadges go here -->
+            </div>
+
+            <!-- Payment Registration Section -->
+            <div class="detail-section-title" style="margin-top:2rem;"><i class="fa-solid fa-credit-card"></i> Validación del Pago Bancario</div>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="payment-voucher">Número de Transacción / Voucher Bancario</label>
+                <input type="text" class="input-control" id="payment-voucher" placeholder="Ej. 18293849" required maxlength="10">
+              </div>
+              <div class="form-group">
+                <label>Monto a Validar (Soles)</label>
+                <div class="input-control" id="payment-monto-label" style="background:rgba(16,185,129,0.08); font-weight:700; color:var(--color-success);">
+                  S/. 0.00
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-actions" style="margin-top:2rem;">
+              <button type="button" class="btn btn-secondary" onclick="resetSubmitForm()">Limpiar Formulario</button>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Enviar Trámite Digital</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- TAB 2.1: PAYMENT REGISTRATION SERVICE -->
+      <!-- MODAL: PASARELA DE PAGOS (abre en overlay, no en pestaña) -->
+      <div class="modal-overlay" id="payment-modal-overlay" onclick="handlePaymentOverlayClick(event)">
+        <div class="modal-container" style="max-width:880px; padding:0;" id="payment-modal-content">
+          <div class="modal-header" style="padding:1.5rem 2rem; border-bottom:1px solid var(--border-color);">
+            <div>
+              <h3 style="font-family:var(--font-display); color:var(--text-main); font-size:1.3rem; font-weight:700;">
+                <i class="fa-solid fa-credit-card" style="color:var(--color-primary);"></i> Pasarela de Pagos
+              </h3>
+              <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.25rem;">
+                Selecciona tu banco o billetera, genera el código y confirma tu orden en un solo flujo.
+              </p>
+            </div>
+            <button class="modal-close" onclick="closePaymentModal()"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div class="modal-body" style="padding:2rem; overflow-y:auto; max-height:calc(90vh - 100px);">
+          <!-- contenido de la pasarela -->
+
+          <div class="payment-method-grid">
+            <button type="button" class="payment-method-card active" id="payment-method-BN" onclick="selectPaymentMethod('BANCO_DE_LA_NACION')">
+              <div class="payment-method-card-icon"><i class="fa-solid fa-landmark"></i></div>
+              <h4>Banco de la Nación</h4>
+              <p>Pago presencial o transferencia segura a la cuenta oficial del campus.</p>
+            </button>
+            <button type="button" class="payment-method-card" id="payment-method-YAPE" onclick="selectPaymentMethod('YAPE')">
+              <div class="payment-method-card-icon"><i class="fa-solid fa-wallet"></i></div>
+              <h4>Yape</h4>
+              <p>Envía el monto desde tu app Yape y registra la operación inmediata.</p>
+            </button>
+            <button type="button" class="payment-method-card" id="payment-method-PLIN" onclick="selectPaymentMethod('PLIN')">
+              <div class="payment-method-card-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+              <h4>Plin</h4>
+              <p>Transferencia rápida desde tu billetera al número oficial de la UNSAAC.</p>
+            </button>
+            <button type="button" class="payment-method-card" id="payment-method-VISA" onclick="selectPaymentMethod('VISA')">
+              <div class="payment-method-card-icon"><i class="fa-brands fa-cc-visa"></i></div>
+              <h4>Tarjeta Visa</h4>
+              <p>Paga con tu tarjeta Visa para finalizar el trámite en línea.</p>
+            </button>
+            <button type="button" class="payment-method-card" id="payment-method-MASTERCARD" onclick="selectPaymentMethod('MASTERCARD')">
+              <div class="payment-method-card-icon"><i class="fa-brands fa-cc-mastercard"></i></div>
+              <h4>Mastercard</h4>
+              <p>Paga con Mastercard en la pasarela y completa tu trámite rápidamente.</p>
+            </button>
+          </div>
+
+          <div id="payment-method-details" class="payment-method-details"></div>
+
+          <form id="submit-payment-form" onsubmit="handlePaymentSubmission(event)">
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="payment-procedure-select">Selecciona el Trámite a Pagar</label>
+                <select class="input-control" id="payment-procedure-select" onchange="updatePaymentProcedureDetails()" required>
+                  <!-- Dinámicamente poblado -->
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="payment-student-code">Código de Estudiante (UNSAAC) <span style="font-weight:400; color:var(--text-muted);">(opcional)</span></label>
+                <input type="text" class="input-control" id="payment-student-code" placeholder="Ej. 211048" maxlength="15">
+              </div>
+              <div class="form-group">
+                <label for="payment-student-dni">DNI / Documento de Identidad</label>
+                <input type="text" class="input-control" id="payment-student-dni" placeholder="Ej. 74382910" required maxlength="8" pattern="\d{8}" title="8 dígitos">
+              </div>
+              <div class="form-group">
+                <label for="payment-student-names">Nombres</label>
+                <input type="text" class="input-control" id="payment-student-names" placeholder="Ej. Juan Carlos" required>
+              </div>
+              <div class="form-group">
+                <label for="payment-student-apellido-paterno">Apellido Paterno</label>
+                <input type="text" class="input-control" id="payment-student-apellido-paterno" placeholder="Ej. Quispe" required>
+              </div>
+              <div class="form-group">
+                <label for="payment-student-apellido-materno">Apellido Materno</label>
+                <input type="text" class="input-control" id="payment-student-apellido-materno" placeholder="Ej. Condori">
+              </div>
+              <div class="form-group">
+                <label for="payment-student-email">Correo Electrónico</label>
+                <input type="email" class="input-control" id="payment-student-email" placeholder="Ej. juan.quispe@unsaac.edu.pe" required>
+              </div>
+              <div class="form-group">
+                <label for="payment-student-phone">Teléfono / Celular</label>
+                <input type="text" class="input-control" id="payment-student-phone" placeholder="Ej. 984729182" required maxlength="9">
+              </div>
+            </div>
+
+            <div class="detail-section-title"><i class="fa-solid fa-cloud-arrow-up"></i> Comprobante de Pago</div>
+            <div class="dropzone-container" onclick="triggerPaymentFileInput()">
+              <input type="file" id="payment-file-input" style="display:none;" onchange="handlePaymentFileSelected(event)" accept=".pdf,.jpg,.png" multiple>
+              <div class="dropzone-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+              <div class="dropzone-text">
+                <h4>Arrastra el comprobante o haz clic aquí</h4>
+                <p>Formatos permitidos: PDF, JPG, PNG (Max 15MB por archivo)</p>
+              </div>
+            </div>
+            <div class="uploaded-files-list" id="payment-uploaded-files-container"></div>
+
+            <div class="form-grid" style="margin-top:1rem;">
+              <div class="form-group">
+                <label for="payment-only-voucher">Número de Voucher Bancario</label>
+                <input type="text" class="input-control" id="payment-only-voucher" placeholder="Ej. 18293849" required maxlength="10">
+              </div>
+              <div class="form-group">
+                <label>Banco / Código de Banco</label>
+                <div class="input-control" id="payment-bank-label" style="background:rgba(123,24,40,0.05); font-weight:700; color:var(--color-primary);">
+                  BN-000
+                </div>
+              </div>
+              <div class="form-group full-width">
+                <label>Monto del Pago</label>
+                <div class="input-control" id="payment-only-amount-label" style="background:rgba(16,185,129,0.08); font-weight:700; color:var(--color-success);">
+                  S/. 0.00
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group full-width" style="margin-top:1rem;">
+              <label for="payment-reference-code">Código de Referencia de Pago</label>
+              <input type="text" class="input-control" id="payment-reference-code" placeholder="Haz clic en Generar Código de Pago" readonly>
+            </div>
+
+            <div class="modal-actions" style="margin-top:2rem; gap:1rem; display:flex; flex-wrap:wrap;">
+              <button type="button" class="btn btn-secondary" onclick="resetPaymentForm()">Limpiar Formulario</button>
+              <button type="button" class="btn btn-tertiary" onclick="generatePaymentReference()"><i class="fa-solid fa-key"></i> Generar Código de Pago</button>
+              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-credit-card"></i> Pagar Ahora</button>
+            </div>
+          </form>
+
+          <div id="payment-confirmation-panel" class="payment-confirmation-panel" style="display:none;">
+            <h4 style="margin-bottom:0.75rem;">Orden de pago generada</h4>
+            <p id="payment-confirmation-text">Tu código de referencia aparecerá aquí.</p>
+          </div>
+          </div><!-- /modal-body -->
+        </div><!-- /modal-container -->
+      </div><!-- /payment-modal-overlay -->
+
+      <!-- TAB 3: TRÁMITE TRACKING -->
+      <div class="tab-view" id="student-track">
+        <div class="glass-panel">
+          <h2 class="section-title"><i class="fa-solid fa-route"></i> Trazabilidad del Trámite en Tiempo Real</h2>
+          <p class="section-subtitle">Ingresa el código único de trámite o el DNI del solicitante para auditar el estado exacto, la oficina evaluadora actual y el historial de revisiones de tu trámite administrativo.</p>
+
+          <div class="tracking-search">
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-receipt"></i>
+              <input type="text" class="search-input" id="tracking-input-id" placeholder="Ingresa el Código de Trámite (e.g. TR-2026-0391) o DNI del Solicitante...">
+            </div>
+            <button class="btn btn-primary" onclick="searchTrackingData()"><i class="fa-solid fa-search"></i> Buscar Rastro</button>
+          </div>
+
+          <div id="tracking-result-box" style="display:none;">
+            <!-- Dynamic tracking cards and timeline content will load here -->
+          </div>
+
+          <div id="tracking-empty-state" class="text-center" style="padding: 3rem 0; color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-route" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+            <h4>No hay búsquedas de rastro activas</h4>
+            <p>Ingresa un código para rastrear el progreso de tu expediente digital.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           ADMIN VIEWS (OFFICES OF UNSAAC)
+           ========================================== -->
+      
+      <!-- TAB 4: ADMIN GENERAL DASHBOARD -->
+      <div class="tab-view" id="admin-dashboard">
+        <div class="glass-panel">
+          <h2 class="section-title"><i class="fa-solid fa-chart-pie"></i> Control General de Procedimientos UNSAAC</h2>
+          <p class="section-subtitle">Panel estadístico y flujo global de trámites administrados por oficinas. Permite evaluar rendimientos académicos y cuellos de botella.</p>
+
+          <div class="stat-cards-grid">
+            <div class="stat-card">
+              <div class="stat-icon-wrapper purple"><i class="fa-solid fa-folder-open"></i></div>
+              <div class="stat-info">
+                <h3 id="stat-total-requests">142</h3>
+                <p>Expedientes Totales</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-wrapper amber"><i class="fa-solid fa-hourglass-half"></i></div>
+              <div class="stat-info">
+                <h3 id="stat-pending-requests">38</h3>
+                <p>En Evaluación</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-wrapper cyan"><i class="fa-solid fa-credit-card"></i></div>
+              <div class="stat-info">
+                <h3 id="stat-paid-requests">81</h3>
+                <p>Vouchers Validados</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-wrapper green"><i class="fa-solid fa-circle-check"></i></div>
+              <div class="stat-info">
+                <h3 id="stat-closed-requests">23</h3>
+                <p>Trámites Resueltos</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Mock Analytics -->
+          <div class="admin-analytics-grid">
+            
+            <div class="chart-panel">
+              <h4>Volumen de Trámites por Dependencia Evaluadora</h4>
+              <div class="chart-container-mock" id="office-bar-chart">
+                <!-- Poblado dinámicamente desde /api/dashboard/stats -->
+              </div>
+            </div>
+
+            <div class="chart-panel">
+              <h4>Distribución de Estado de Solicitudes Digitales</h4>
+              <div class="donut-chart-mock">
+                <div class="donut-graphic" id="status-donut-graphic">
+                  <div class="donut-inner"></div>
+                </div>
+                <div class="donut-legend" id="status-donut-legend">
+                  <!-- Poblado dinámicamente desde /api/dashboard/stats -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: ADMIN REQUESTS BANDBOX -->
+      <div class="tab-view" id="admin-requests">
+        <div class="glass-panel">
+          <h2 class="section-title"><i class="fa-solid fa-inbox"></i> Bandeja de Recepción de Trámites</h2>
+          <p class="section-subtitle">Administra, audita y valida los requisitos adjuntados de forma digital por los alumnos. Selecciona la oficina reguladora actual para filtrar solicitudes.</p>
+
+          <div class="search-bar-container" style="margin-bottom:1.5rem;">
+            <select class="filter-select" id="admin-office-filter" onchange="renderAdminTable()" style="padding: 0.8rem 1.5rem;">
+              <option value="">Todas las Oficinas</option>
+            </select>
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-filter"></i>
+              <input type="text" class="search-input" style="padding-top:0.8rem; padding-bottom:0.8rem;" id="admin-table-search" oninput="renderAdminTable()" placeholder="Buscar por código de trámite, alumno o DNI...">
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="premium-table">
+              <thead>
+                <tr>
+                  <th>Cod. Trámite</th>
+                  <th>Solicitante</th>
+                  <th>Trámite Solicitado</th>
+                  <th>Oficina Resp.</th>
+                  <th>Monto Pago</th>
+                  <th>Estado</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="admin-table-body">
+                <!-- Dynamically populated table rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 6: ADMIN ANALYTICS & REPORTS -->
+      <div class="tab-view" id="admin-reports">
+        <div class="glass-panel">
+          <h2 class="section-title"><i class="fa-solid fa-file-pdf"></i> Reportes del Tupa Académico</h2>
+          <p class="section-subtitle">Exporta informes auditables de solicitudes procesadas, tiempos medios de resolución y auditoría financiera de vouchers validados.</p>
+
+          <div class="cost-grid" style="background: rgba(123, 24, 40, 0.04); border-color: rgba(123,24,40,0.15);">
+            <div style="color:var(--text-main)">
+              <h4 style="font-family:var(--font-display); font-size:1.1rem; margin-bottom:0.3rem;">Generador de Reportes Financieros</h4>
+              <p style="font-size:0.85rem; color:var(--text-muted)">Calcula el total de recaudación de caja basado en los vouchers de trámites registrados aprobados.</p>
+            </div>
+            <div style="text-align: right;">
+              <button class="btn btn-primary" onclick="simulateReportDownload()"><i class="fa-solid fa-file-excel"></i> Exportar XLSX</button>
+            </div>
+          </div>
+
+          <div class="glass-panel" style="background:rgba(255,255,255,0.01); border:none; padding:1.5rem; margin-bottom:0;">
+            <h4 style="font-family:var(--font-display); color:var(--text-main); font-size:1.05rem; margin-bottom:1rem;">Tiempos Promedios de Atención de Trámites (Días)</h4>
+            <div class="requisite-list" style="margin-bottom:0;">
+              <li><strong>Constancia de Estudios:</strong> 1.2 Días promedio de atención.</li>
+              <li><strong>Carné Universitario:</strong> 3.5 Días promedio de emisión.</li>
+              <li><strong>Traslado de Sede:</strong> 7.8 Días promedio (Requiere acuerdo de Consejo Universitario).</li>
+              <li><strong>Duplicado de Grado o Título:</strong> 12.4 Días promedio de emisión y rotulado.</li>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ==========================================
+       MODAL DE DETALLE DE TRÁMITE
+       ========================================== -->
+  <div class="modal-overlay" id="procedure-detail-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div>
+          <div class="procedure-code" id="modal-proc-code">PA88401484E</div>
+          <h3 id="modal-proc-title" style="font-family:var(--font-display); font-size:1.3rem; margin-top:0.5rem; color:var(--text-main);"></h3>
+        </div>
+        <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="detail-section-title"><i class="fa-solid fa-circle-info"></i> Descripción del Trámite</div>
+        <p id="modal-proc-desc" style="font-size:0.9rem; color:var(--text-muted); line-height:1.6; margin-bottom:2rem;"></p>
+
+        <div class="detail-section-title"><i class="fa-solid fa-list-check"></i> Requisitos Legales del TUPA</div>
+        <ul class="requisite-list" id="modal-proc-requisites">
+          <!-- Populated dynamically -->
+        </ul>
+
+        <div class="detail-section-title"><i class="fa-solid fa-coins"></i> Tasa Administrativa</div>
+        <div class="cost-grid">
+          <div>
+            <div class="cost-label" id="modal-proc-cost-desc">PAGO POR DERECHO DE TRAMITE</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">Banco de la Nación / Caja UNSAAC (Código Banco: <span id="modal-proc-bank">0023</span>)</div>
+          </div>
+          <div class="cost-value" id="modal-proc-cost-value">S/. 220.80</div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-secondary" onclick="closeModal()">Cerrar Consulta</button>
+          <button class="btn btn-primary" id="btn-modal-initiate" onclick="initiateFromModal()"><i class="fa-solid fa-file-signature"></i> Iniciar Trámite Digital</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL DE GESTIÓN ADMINISTRATIVA (OFICINA)
+       ========================================== -->
+  <div class="modal-overlay" id="admin-action-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div>
+          <span class="procedure-code" id="admin-modal-id">TR-2026-0391</span>
+          <h3 id="admin-modal-student" style="font-family:var(--font-display); font-size:1.25rem; margin-top:0.5rem; color:var(--text-main);"></h3>
+        </div>
+        <button class="modal-close" onclick="closeAdminModal()"><i class="fa-solid fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="detail-section-title"><i class="fa-solid fa-file-lines"></i> Información de la Solicitud</div>
+        <div class="form-grid" style="margin-bottom: 1.5rem;">
+          <div>
+            <label>Trámite Solicitado</label>
+            <p id="admin-modal-proc-name" style="font-size:0.9rem; color:var(--text-main); font-weight:600;"></p>
+          </div>
+          <div>
+            <label>Código de Alumno / Especialidad</label>
+            <p id="admin-modal-student-meta" style="font-size:0.9rem; color:var(--text-main);"></p>
+          </div>
+          <div>
+            <label>Código de Voucher Bancario</label>
+            <p id="admin-modal-voucher" style="font-size:0.9rem; color:var(--color-secondary); font-weight:700;"></p>
+          </div>
+          <div>
+            <label>Monto de Pago Validado</label>
+            <p id="admin-modal-cost" style="font-size:0.9rem; color:var(--color-success); font-weight:700;"></p>
+          </div>
+        </div>
+
+        <div class="detail-section-title"><i class="fa-solid fa-paperclip"></i> Archivos Digitales Cargados</div>
+        <div class="uploaded-files-list" id="admin-modal-files" style="margin-bottom: 2rem;">
+          <!-- Dynamically populated files to view/approve -->
+        </div>
+
+        <div class="detail-section-title"><i class="fa-solid fa-signature"></i> Calificar y Resolver Solicitud</div>
+        <div class="form-group" style="margin-bottom:2rem;">
+          <label for="admin-change-status">Cambiar Estado Operativo</label>
+          <select class="input-control" id="admin-change-status">
+            <option value="SOLICITADO">SOLICITADO (Pendiente revisión)</option>
+            <option value="EN PROCESO">EN PROCESO (En evaluación de oficina)</option>
+            <option value="PAGADO">PAGADO (Pago aprobado y verificado)</option>
+            <option value="CERRADO">CERRADO (Procedimiento Aprobado/Resuelto)</option>
+            <option value="ANULADO">ANULADO / OBSERVADO (Solicitud rechazada)</option>
+          </select>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-secondary" onclick="closeAdminModal()">Cancelar</button>
+          <button class="btn btn-primary" onclick="saveAdminResolution()"><i class="fa-solid fa-save"></i> Guardar Resolución</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL DE LOGIN ADMINISTRATIVO
+       ========================================== -->
+  <div class="modal-overlay" id="admin-login-modal">
+    <div class="modal-container" style="max-width:420px;">
+      <div class="modal-header">
+        <div>
+          <h3 style="font-family:var(--font-display); font-size:1.2rem; color:var(--text-main);">
+            <i class="fa-solid fa-lock" style="color:var(--color-primary);"></i> Acceso Administrativo
+          </h3>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.25rem;">Ingresa con tus credenciales de oficina UNSAAC.</p>
+        </div>
+        <button class="modal-close" onclick="closeAdminLoginModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="admin-login-form" onsubmit="handleAdminLogin(event)">
+          <div class="form-group full-width" style="margin-bottom:1rem;">
+            <label for="admin-login-user">Usuario</label>
+            <input type="text" class="input-control" id="admin-login-user" placeholder="Ej. ADMIN" required autocomplete="username">
+          </div>
+          <div class="form-group full-width" style="margin-bottom:0.5rem;">
+            <label for="admin-login-password">Contraseña</label>
+            <input type="password" class="input-control" id="admin-login-password" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+          <p id="admin-login-error" style="color:var(--color-danger); font-size:0.85rem; min-height:1.2rem; margin-bottom:0.5rem;"></p>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeAdminLoginModal()">Cancelar</button>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-right-to-bracket"></i> Ingresar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       JAVASCRIPT LOGIC & DATABASE SIMULATOR
+       ========================================== -->
+  <script>
+    // -------------------------------------------------------------
+    // Application state (backed by the real REST API + MySQL)
+    // -------------------------------------------------------------
+    let catalog = [];
+    let uploadedFiles = [];
+    let paymentUploadedFiles = [];
+    let currentSelectedProcedure = null;
+    let adminSolicitudes = [];
+    let currentAdminRequestId = null;
+
+    let adminToken = localStorage.getItem('unsaac_admin_token') || null;
+    let adminUser = JSON.parse(localStorage.getItem('unsaac_admin_user') || 'null');
+
+    const paymentMethods = {
+      BANCO_DE_LA_NACION: {
+        label: 'Banco de la Nación',
+        code: 'BN',
+        type: 'bank_transfer',
+        description: 'Paga con tu cuenta o voucher en cualquiera de las agencias del Banco de la Nación.',
+        details: [
+          'Número de Cuenta: 001-2345678-9',
+          'Código de Operación: 8321',
+          'Recibo de pago o voucher escaneado.',
+          'Entrega el código de referencia en el portal.'
+        ]
+      },
+      YAPE: {
+        label: 'Yape',
+        code: 'YAPE',
+        type: 'mobile_wallet',
+        description: 'Realiza el pago desde Yape usando tu app y registra la operación aquí.',
+        details: [
+          'Número destino: 987 654 321',
+          'Monto exacto del trámite.',
+          'Adjunta captura o comprobante de la operación.',
+          'Usa el código de referencia generado.'
+        ]
+      },
+      PLIN: {
+        label: 'Plin',
+        code: 'PLIN',
+        type: 'mobile_wallet',
+        description: 'Escanea el código o envía desde Plin al número de la UNSAAC.',
+        details: [
+          'Número destino: 987 654 321',
+          'Nombre: UNSAAC Pasarela de Pagos',
+          'Adjunta la constancia de transferencia.',
+          'Mantén tu referencia para seguimiento.'
+        ]
+      },
+      VISA: {
+        label: 'Tarjeta Visa',
+        code: 'VISA',
+        type: 'card',
+        description: 'Paga directamente con tu tarjeta Visa usando la pasarela simulada.',
+        details: [
+          'Ingresa número de tarjeta, fecha de vencimiento y CVV.',
+          'Verifica que el monto coincida con tu trámite.',
+          'La plataforma validará la transacción.',
+          'Recibirás un código de pago inmediato.'
+        ]
+      },
+      MASTERCARD: {
+        label: 'Mastercard',
+        code: 'MC',
+        type: 'card',
+        description: 'Paga con tu tarjeta Mastercard en la pasarela integrada.',
+        details: [
+          'Ingresa número de tarjeta, fecha de vencimiento y CVV.',
+          'El pago se procesa en la pasarela segura.',
+          'Recuerda usar el código de referencia generado.',
+          'Conserva el comprobante para seguimiento.'
+        ]
+      }
+    };
+
+    let selectedPaymentMethod = 'BANCO_DE_LA_NACION';
+
+    // Initialize Application
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadCatalog();
+      renderPaymentMethodDetails();
+      updateAdminSessionUI();
+    });
+
+    // -------------------------------------------------------------
+    // API HELPERS
+    // -------------------------------------------------------------
+    function getAdminHeaders() {
+      return adminToken ? { 'Authorization': `Bearer ${adminToken}` } : {};
+    }
+
+    async function adminFetch(url, options = {}) {
+      const headers = { ...(options.headers || {}), ...getAdminHeaders() };
+      const res = await fetch(url, { ...options, headers });
+      if (res.status === 401) {
+        handleAdminLogout();
+        openAdminLoginModal();
+        throw new Error('Tu sesión expiró. Vuelve a iniciar sesión.');
+      }
+      return res;
+    }
+
+    async function loadCatalog() {
+      try {
+        const res = await fetch('/api/catalogo');
+        const data = await res.json();
+        catalog = data.catalog || [];
+      } catch (err) {
+        console.error('No se pudo cargar el catálogo TUPA', err);
+        catalog = [];
+      }
+      renderCatalog(catalog);
+      populateSelectCatalog(catalog);
+      populateOfficeFilters(catalog);
+      updateFormRequisites();
+    }
+
+    function populateOfficeFilters(items) {
+      const offices = [...new Set(items.map(i => i.office))].sort();
+      ['catalog-office-filter', 'admin-office-filter'].forEach(id => {
+        const select = document.getElementById(id);
+        if (!select) return;
+        const current = select.value;
+        select.innerHTML = '<option value="">Todas las Oficinas</option>';
+        offices.forEach(office => {
+          const opt = document.createElement('option');
+          opt.value = office;
+          opt.innerText = office;
+          select.appendChild(opt);
+        });
+        select.value = current;
+      });
+    }
+
+    // -------------------------------------------------------------
+    // ADMIN AUTHENTICATION
+    // -------------------------------------------------------------
+    function openAdminLoginModal() {
+      document.getElementById('admin-login-modal').classList.add('open');
+    }
+
+    function closeAdminLoginModal() {
+      document.getElementById('admin-login-modal').classList.remove('open');
+      document.getElementById('admin-login-error').textContent = '';
+    }
+
+    async function handleAdminLogin(e) {
+      e.preventDefault();
+      const clogin = document.getElementById('admin-login-user').value.trim();
+      const password = document.getElementById('admin-login-password').value;
+      const errorEl = document.getElementById('admin-login-error');
+      errorEl.textContent = '';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ clogin, password })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'No se pudo iniciar sesión.');
+
+        adminToken = data.token;
+        adminUser = data.user;
+        localStorage.setItem('unsaac_admin_token', adminToken);
+        localStorage.setItem('unsaac_admin_user', JSON.stringify(adminUser));
+
+        closeAdminLoginModal();
+        document.getElementById('admin-login-form').reset();
+        setPortalUI('admin');
+        await activateAdminPortal();
+      } catch (err) {
+        errorEl.textContent = err.message;
+      }
+    }
+
+    function handleAdminLogout() {
+      adminToken = null;
+      adminUser = null;
+      localStorage.removeItem('unsaac_admin_token');
+      localStorage.removeItem('unsaac_admin_user');
+      updateAdminSessionUI();
+      switchPortal('student');
+    }
+
+    function updateAdminSessionUI() {
+      const info = document.getElementById('admin-session-info');
+      if (!info) return;
+      info.innerHTML = adminUser
+        ? `<i class="fa-solid fa-user-shield"></i> ${adminUser.perfil}<br><small>${adminUser.nombres || adminUser.clogin}</small>`
+        : '';
+    }
+
+    // -------------------------------------------------------------
+    // PORTAL NAVIGATION & ROUTING
+    // -------------------------------------------------------------
+    function openPaymentModal() {
+      document.getElementById('payment-modal-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePaymentModal() {
+      document.getElementById('payment-modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handlePaymentOverlayClick(e) {
+      if (e.target === document.getElementById('payment-modal-overlay')) {
+        closePaymentModal();
+      }
+    }
+
+    function removeUploadedFile(el, name) {
+      uploadedFiles = uploadedFiles.filter(f => f.name !== name);
+      el.closest('.file-badge').remove();
+    }
+
+    function switchPortal(portal) {
+      if (portal === 'admin' && !adminToken) {
+        openAdminLoginModal();
+        return;
+      }
+      setPortalUI(portal);
+      if (portal === 'admin') {
+        activateAdminPortal();
+      } else {
+        switchTab('student-catalog');
+      }
+    }
+
+    function setPortalUI(portal) {
+      document.getElementById("btn-student-view").classList.toggle("active", portal === 'student');
+      document.getElementById("btn-admin-view").classList.toggle("active", portal === 'admin');
+      document.getElementById("student-nav-group").style.display = portal === 'student' ? "block" : "none";
+      document.getElementById("admin-nav-group").style.display = portal === 'admin' ? "block" : "none";
+
+      document.querySelectorAll(".nav-item").forEach(el => el.classList.remove("active"));
+      const targetTabId = portal === 'student' ? 'student-catalog' : 'admin-dashboard';
+      document.querySelector(`[data-tab="${targetTabId}"]`)?.classList.add("active");
+    }
+
+    async function activateAdminPortal() {
+      updateAdminSessionUI();
+      switchTab('admin-dashboard');
+      await refreshAdminData();
+    }
+
+    async function refreshAdminData() {
+      await Promise.all([updateDashboardStats(), renderAdminTable()]);
+    }
+
+    function switchTab(tabId) {
+      // Hide all tabs
+      document.querySelectorAll(".tab-view").forEach(tab => tab.classList.remove("active"));
+      
+      // Highlight sidebar item
+      document.querySelectorAll(".nav-item").forEach(nav => {
+        if (nav.getAttribute("data-tab") === tabId) {
+          nav.classList.add("active");
+        } else {
+          nav.classList.remove("active");
+        }
+      });
+
+      // Show requested tab
+      const targetTab = document.getElementById(tabId);
+      if (targetTab) {
+        targetTab.classList.add("active");
+      }
+    }
+
+    // -------------------------------------------------------------
+    // STUDENT PORTAL LOGIC
+    // -------------------------------------------------------------
+    function renderCatalog(catalogItems) {
+      const container = document.getElementById("catalog-cards-container");
+      container.innerHTML = "";
+
+      if (catalogItems.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: span 3; text-align:center; padding:3rem; color:var(--text-muted);">
+            <i class="fa-solid fa-folder-open" style="font-size:3rem; margin-bottom:1rem; opacity:0.3;"></i>
+            <h4>No se encontraron trámites con esos términos</h4>
+            <p>Intenta buscar otra palabra clave.</p>
+          </div>
+        `;
+        return;
+      }
+
+      catalogItems.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "catalog-card";
+        card.onclick = () => openModal(item.codigo);
+        
+        card.innerHTML = `
+          <div>
+            <div class="card-header-info">
+              <span class="procedure-code">${item.codigo}</span>
+              <span class="procedure-office"><i class="fa-solid fa-building-columns"></i> ${item.office}</span>
+            </div>
+            <h3 class="procedure-title">${item.denominacion}</h3>
+            <p class="procedure-description">${item.descripcion}</p>
+          </div>
+          <div class="card-footer">
+            <span class="monto-badge">S/. ${Number(item.monto).toFixed(2)}</span>
+            <button class="btn-card-action">Ver Requisitos <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterCatalog() {
+      const query = document.getElementById("catalog-search-box").value.toLowerCase();
+      const office = document.getElementById("catalog-office-filter").value;
+
+      const filtered = catalog.filter(item => {
+        const matchesQuery = item.denominacion.toLowerCase().includes(query) || 
+                             item.descripcion.toLowerCase().includes(query) || 
+                             String(item.codigo).toLowerCase().includes(query);
+        const matchesOffice = office === "" || item.office === office;
+        return matchesQuery && matchesOffice;
+      });
+
+      renderCatalog(filtered);
+    }
+
+    // Modal Details
+    function openModal(code) {
+      const item = catalog.find(c => c.codigo == code);
+      if (!item) return;
+
+      currentSelectedProcedure = item;
+      document.getElementById("modal-proc-code").innerText = item.codigo;
+      document.getElementById("modal-proc-title").innerText = item.denominacion;
+      document.getElementById("modal-proc-desc").innerText = item.descripcion;
+      document.getElementById("modal-proc-bank").innerText = item.codigoBanco || "BN-023";
+      document.getElementById("modal-proc-cost-value").innerText = `S/. ${Number(item.monto).toFixed(2)}`;
+
+      const reqContainer = document.getElementById("modal-proc-requisites");
+      reqContainer.innerHTML = "";
+      item.requisites.forEach(req => {
+        const li = document.createElement("li");
+        li.innerText = req;
+        reqContainer.appendChild(li);
+      });
+
+      document.getElementById("procedure-detail-modal").classList.add("open");
+    }
+
+    function closeModal() {
+      document.getElementById("procedure-detail-modal").classList.remove("open");
+    }
+
+    function initiateFromModal() {
+      closeModal();
+      if (currentSelectedProcedure) {
+        document.getElementById("submit-tramite-select").value = currentSelectedProcedure.codigo;
+        updateFormRequisites();
+        switchTab('student-submit');
+      }
+    }
+
+    // -------------------------------------------------------------
+    // FORM REGISTRATION LOGIC
+    // -------------------------------------------------------------
+    function populateSelectCatalog(items) {
+      const select = document.getElementById("submit-tramite-select");
+      const paymentSelect = document.getElementById("payment-procedure-select");
+      select.innerHTML = "";
+      if (paymentSelect) paymentSelect.innerHTML = "";
+
+      items.forEach(item => {
+        const opt = document.createElement("option");
+        opt.value = item.codigo;
+        opt.innerText = `[${item.codigo}] ${item.denominacion}`;
+        select.appendChild(opt);
+
+        if (paymentSelect) {
+          const paymentOpt = document.createElement("option");
+          paymentOpt.value = item.codigo;
+          paymentOpt.innerText = `[${item.codigo}] ${item.denominacion}`;
+          paymentSelect.appendChild(paymentOpt);
+        }
+      });
+
+      if (paymentSelect) updatePaymentProcedureDetails();
+    }
+
+    function updateFormRequisites() {
+      const code = document.getElementById("submit-tramite-select").value;
+      const item = catalog.find(c => c.codigo == code);
+      if (!item) return;
+
+      document.getElementById("payment-monto-label").innerText = `S/. ${Number(item.monto).toFixed(2)}`;
+
+      const checkListContainer = document.getElementById("form-requisite-checklist");
+      checkListContainer.innerHTML = "";
+      
+      item.requisites.forEach((req, idx) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.style.display = "flex";
+        itemDiv.style.alignItems = "flex-start";
+        itemDiv.style.gap = "0.75rem";
+        itemDiv.style.padding = "0.6rem 0";
+        
+        itemDiv.innerHTML = `
+          <input type="checkbox" id="req-check-${idx}" style="margin-top: 0.25rem;" required>
+          <label for="req-check-${idx}" style="color:var(--text-main); font-weight:500; line-height:1.4; cursor:pointer;">
+            ${req}
+          </label>
+        `;
+        checkListContainer.appendChild(itemDiv);
+      });
+    }
+
+    // File Upload Simulation
+    function triggerFileInput() {
+      document.getElementById("form-file-input").click();
+    }
+
+    function handleFileSelected(event) {
+      const files = event.target.files;
+      const container = document.getElementById("uploaded-files-container");
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        uploadedFiles.push(file);
+
+        const badge = document.createElement("div");
+        badge.className = "file-badge";
+        badge.innerHTML = `
+          <div class="file-name">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+          </div>
+          <button class="btn-remove-file" type="button" onclick="removeUploadedFile(this, '${file.name}')">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        `;
+        container.appendChild(badge);
+      }
+      event.target.value = '';
+    }
+
+    function triggerPaymentFileInput() {
+      document.getElementById("payment-file-input").click();
+    }
+
+    function handlePaymentFileSelected(event) {
+      const files = event.target.files;
+      const container = document.getElementById("payment-uploaded-files-container");
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        paymentUploadedFiles.push(file);
+
+        const badge = document.createElement("div");
+        badge.className = "file-badge";
+        badge.innerHTML = `
+          <div class="file-name">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+          </div>
+          <button class="btn-remove-file" type="button" onclick="removePaymentUploadedFile(this, '${file.name}')">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        `;
+        container.appendChild(badge);
+      }
+      event.target.value = '';
+    }
+
+    function removePaymentUploadedFile(el, name) {
+      paymentUploadedFiles = paymentUploadedFiles.filter(f => f.name !== name);
+      el.closest('.file-badge').remove();
+    }
+
+    function resetSubmitForm() {
+      document.getElementById("submit-tramite-form").reset();
+      document.getElementById("uploaded-files-container").innerHTML = "";
+      uploadedFiles = [];
+      updateFormRequisites();
+    }
+
+    function resetPaymentForm() {
+      document.getElementById("submit-payment-form").reset();
+      document.getElementById("payment-uploaded-files-container").innerHTML = "";
+      paymentUploadedFiles = [];
+      selectedPaymentMethod = 'BANCO_DE_LA_NACION';
+      document.querySelectorAll('.payment-method-card').forEach(card => card.classList.remove('active'));
+      document.getElementById('payment-method-BN').classList.add('active');
+      updatePaymentProcedureDetails();
+      renderPaymentMethodDetails();
+      document.getElementById('payment-reference-code').value = '';
+      document.getElementById('payment-confirmation-panel').style.display = 'none';
+    }
+
+    function selectPaymentMethod(methodKey) {
+      selectedPaymentMethod = methodKey;
+      document.querySelectorAll('.payment-method-card').forEach(card => card.classList.remove('active'));
+      const button = document.getElementById(`payment-method-${methodKey === 'BANCO_DE_LA_NACION' ? 'BN' : methodKey}`);
+      if (button) button.classList.add('active');
+      renderPaymentMethodDetails();
+    }
+
+    function renderPaymentMethodDetails() {
+      const method = paymentMethods[selectedPaymentMethod];
+      if (!method) return;
+
+      const container = document.getElementById('payment-method-details');
+      container.innerHTML = `
+        <h4 style="margin-bottom:0.75rem; color:var(--text-main);">${method.label}</h4>
+        <p style="color:var(--text-muted); margin-bottom:1rem;">${method.description}</p>
+        <ul class="requisite-list" style="margin-bottom:0;">
+          ${method.details.map(detail => `<li>${detail}</li>`).join('')}
+        </ul>
+      `;
+
+      if (method.type === 'card') {
+        container.innerHTML += `
+          <div class="form-grid" style="margin-top:1rem;">
+            <div class="form-group full-width">
+              <label for="card-number">Número de Tarjeta</label>
+              <input type="text" class="input-control" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" required>
+            </div>
+            <div class="form-group">
+              <label for="card-expiry">Vencimiento</label>
+              <input type="text" class="input-control" id="card-expiry" placeholder="MM/AA" maxlength="5" required>
+            </div>
+            <div class="form-group">
+              <label for="card-cvv">CVV</label>
+              <input type="text" class="input-control" id="card-cvv" placeholder="123" maxlength="3" required>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function updatePaymentProcedureDetails() {
+      const code = document.getElementById("payment-procedure-select").value;
+      const item = catalog.find(c => c.codigo == code);
+      if (!item) return;
+
+      document.getElementById("payment-only-amount-label").innerText = `S/. ${Number(item.monto).toFixed(2)}`;
+      document.getElementById("payment-bank-label").innerText = item.codigoBanco || 'BN-000';
+      renderPaymentMethodDetails();
+    }
+
+    function generatePaymentReference() {
+      const referenceCode = `PP-${Math.floor(100000 + Math.random() * 900000)}`;
+      document.getElementById('payment-reference-code').value = referenceCode;
+      document.getElementById('payment-confirmation-panel').style.display = 'block';
+      document.getElementById('payment-confirmation-text').innerText = `Tu orden de pago ha sido generada con el código ${referenceCode}. Sigue las instrucciones del método seleccionado y luego presiona Pagar Ahora.`;
+      return referenceCode;
+    }
+
+    async function handlePaymentSubmission(e) {
+      e.preventDefault();
+      const code = document.getElementById("payment-procedure-select").value;
+      const item = catalog.find(c => c.codigo == code);
+      if (!item) return;
+
+      const referenceCode = document.getElementById('payment-reference-code').value || generatePaymentReference();
+      const voucher = document.getElementById("payment-only-voucher").value.trim();
+      const studentDni = document.getElementById("payment-student-dni").value.trim();
+      const studentCode = document.getElementById("payment-student-code").value.trim();
+      const studentName = document.getElementById("payment-student-names").value.trim();
+      const apellidoPaterno = document.getElementById("payment-student-apellido-paterno").value.trim();
+      const apellidoMaterno = document.getElementById("payment-student-apellido-materno").value.trim();
+      const studentEmail = document.getElementById("payment-student-email").value.trim();
+      const studentPhone = document.getElementById("payment-student-phone").value.trim();
+
+      if (!voucher || !studentDni || !studentName || !apellidoPaterno) {
+        alert('Completa todos los campos obligatorios para continuar con el pago.');
+        return;
+      }
+
+      if (selectedPaymentMethod === 'VISA') {
+        const cardNumber = document.getElementById('card-number')?.value.trim();
+        const cardExpiry = document.getElementById('card-expiry')?.value.trim();
+        const cardCvv = document.getElementById('card-cvv')?.value.trim();
+        if (!cardNumber || !cardExpiry || !cardCvv) {
+          alert('Completa los datos de la tarjeta para procesar el pago.');
+          return;
+        }
+      }
+
+      const formData = new FormData();
+      formData.append('procedureCode', item.codigo);
+      formData.append('dni', studentDni);
+      formData.append('nombres', studentName);
+      formData.append('apellidoPaterno', apellidoPaterno);
+      formData.append('apellidoMaterno', apellidoMaterno);
+      formData.append('codigoAlumno', studentCode);
+      formData.append('correo', studentEmail);
+      formData.append('telefono', studentPhone);
+      formData.append('tipoSolicitante', '1');
+      formData.append('voucher', voucher);
+      paymentUploadedFiles.forEach(file => formData.append('files', file));
+
+      try {
+        const response = await fetch('/api/solicitudes', { method: 'POST', body: formData });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Error procesando la pasarela de pagos.');
+
+        resetPaymentForm();
+        closePaymentModal();
+        alert(`Orden de pago registrada correctamente.\nReferencia de pasarela: ${referenceCode}\nCódigo de trámite para seguimiento: ${data.id}`);
+        document.getElementById("tracking-input-id").value = data.id;
+        await searchTrackingData();
+        switchTab('student-track');
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    async function handleTramiteSubmission(e) {
+      e.preventDefault();
+
+      const code = document.getElementById("submit-tramite-select").value;
+      const item = catalog.find(c => c.codigo == code);
+      if (!item) return;
+
+      const checkboxes = document.querySelectorAll('#form-requisite-checklist input[type="checkbox"]');
+      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+      if (checkboxes.length > 0 && !allChecked) {
+        alert('Debes confirmar todos los requisitos obligatorios antes de enviar.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('procedureCode', item.codigo);
+      formData.append('dni', document.getElementById("student-dni").value.trim());
+      formData.append('nombres', document.getElementById("student-names").value.trim());
+      formData.append('apellidoPaterno', document.getElementById("student-apellido-paterno").value.trim());
+      formData.append('apellidoMaterno', document.getElementById("student-apellido-materno").value.trim());
+      formData.append('codigoAlumno', document.getElementById("student-code").value.trim());
+      formData.append('correo', document.getElementById("student-email").value.trim());
+      formData.append('telefono', document.getElementById("student-phone").value.trim());
+      formData.append('tipoSolicitante', '1');
+      formData.append('voucher', document.getElementById("payment-voucher").value.trim());
+      uploadedFiles.forEach(file => formData.append('files', file));
+
+      try {
+        const response = await fetch('/api/solicitudes', { method: 'POST', body: formData });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'No se pudo registrar la solicitud.');
+
+        resetSubmitForm();
+        alert(`¡Solicitud enviada con éxito!\nCódigo de Trámite: ${data.id}\nConserva este código para hacerle seguimiento.`);
+
+        document.getElementById("tracking-input-id").value = data.id;
+        await searchTrackingData();
+        switchTab('student-track');
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // TRACKING / TRACEABILITY LOGIC
+    // -------------------------------------------------------------
+    async function searchTrackingData() {
+      const query = document.getElementById("tracking-input-id").value.trim();
+      const resultBox = document.getElementById("tracking-result-box");
+      const emptyState = document.getElementById("tracking-empty-state");
+
+      if (!query) {
+        alert("Por favor, ingresa un código de trámite o DNI.");
+        return;
+      }
+
+      let resultados = [];
+      try {
+        const res = await fetch(`/api/solicitudes/rastreo?q=${encodeURIComponent(query)}`);
+        const data = await res.json();
+        if (res.ok) resultados = data.resultados || [];
+      } catch (err) {
+        resultados = [];
+      }
+
+      if (!resultados.length) {
+        emptyState.style.display = "block";
+        resultBox.style.display = "none";
+        emptyState.innerHTML = `
+          <i class="fa-solid fa-circle-exclamation" style="font-size: 3rem; color:var(--color-danger); margin-bottom: 1rem;"></i>
+          <h4>Expediente No Encontrado</h4>
+          <p>No pudimos encontrar ningún trámite registrado con el código o DNI "${query}".</p>
+        `;
+        return;
+      }
+
+      emptyState.style.display = "none";
+      resultBox.style.display = "block";
+
+      // Render request metadata card and step timeline
+      const statusLabels = {
+        "SOLICITADO": { label: "SOLICITADO", icon: "fa-folder-open" },
+        "EN PROCESO": { label: "EN EVALUACIÓN", icon: "fa-hourglass-half" },
+        "PAGADO": { label: "PAGO COMPROBADO", icon: "fa-credit-card" },
+        "PAGADO SIN ADJUNTO": { label: "PAGO REGISTRADO", icon: "fa-credit-card" },
+        "CERRADO": { label: "RESUELTO / FINALIZADO", icon: "fa-circle-check" },
+        "ANULADO": { label: "RECHAZADO / OBSERVADO", icon: "fa-circle-xmark" }
+      };
+
+      resultBox.innerHTML = resultados.map(request => {
+        const meta = statusLabels[request.status] || { label: request.status, icon: 'fa-circle-question' };
+        const statusClass = request.status.toLowerCase().replace(/ /g, "_");
+        const apellidos = [request.apellidoPaterno, request.apellidoMaterno].filter(Boolean).join(' ');
+
+        return `
+          <div class="glass-panel" style="background:rgba(123,24,40,0.03); border-color:rgba(123,24,40,0.08); padding:1.5rem; margin-bottom:1.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+              <div>
+                <span class="procedure-code" style="font-size:0.85rem;">Expediente: ${request.id}</span>
+                <h3 style="font-family:var(--font-display); color:var(--text-main); font-size:1.25rem; margin-top:0.3rem;">${request.procedureName || 'Trámite TUPA'}</h3>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">
+                  <i class="fa-solid fa-user"></i> Alumno: ${request.nombres} ${apellidos} | <i class="fa-solid fa-building-columns"></i> Dependencia: ${request.office}
+                </p>
+              </div>
+              <div>
+                <span class="status-badge ${statusClass}">
+                  <i class="fa-solid ${meta.icon}"></i> ${meta.label}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <h4 style="font-family:var(--font-display); color:var(--text-main); margin-bottom:1.5rem;"><i class="fa-solid fa-list-check"></i> Historial de Trazabilidad Administrativa</h4>
+          <div class="tracking-timeline" style="margin-bottom:2rem;">
+            ${request.history.map((hist, idx) => {
+              const isLatest = idx === 0;
+              const completedClass = isLatest ? "active" : "completed";
+              return `
+                <div class="timeline-step ${completedClass}">
+                  <div class="timeline-node ${isLatest ? 'pulse-node' : ''}"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-header">
+                      <span class="timeline-title">${hist.status}</span>
+                      <span class="timeline-time">${hist.fecha}</span>
+                    </div>
+                    <p class="timeline-desc">${hist.descripcion}</p>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }).join('<hr style="border-color:var(--border-color); margin:0 0 1.5rem;">');
+    }
+
+    // -------------------------------------------------------------
+    // ADMINISTRATIVE PORTAL LOGIC (OFFICES)
+    // -------------------------------------------------------------
+    async function renderAdminTable() {
+      const officeFilter = document.getElementById("admin-office-filter").value;
+      const searchVal = document.getElementById("admin-table-search").value.toLowerCase();
+      const tbody = document.getElementById("admin-table-body");
+
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--text-muted);">Cargando expedientes...</td></tr>`;
+
+      try {
+        const res = await adminFetch('/api/solicitudes');
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'No se pudo cargar la bandeja de trámites.');
+        adminSolicitudes = data.resultados || [];
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--color-danger);">${err.message}</td></tr>`;
+        return;
+      }
+
+      const filtered = adminSolicitudes.filter(req => {
+        const matchesOffice = officeFilter === "" || req.office === officeFilter;
+        const apellidos = [req.apellidoPaterno, req.apellidoMaterno].filter(Boolean).join(' ');
+        const matchesSearch = !searchVal ||
+                              req.id.toLowerCase().includes(searchVal) ||
+                              (req.nombres || '').toLowerCase().includes(searchVal) ||
+                              apellidos.toLowerCase().includes(searchVal) ||
+                              (req.dni || '').includes(searchVal) ||
+                              (req.procedureName || '').toLowerCase().includes(searchVal);
+        return matchesOffice && matchesSearch;
+      });
+
+      tbody.innerHTML = "";
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align:center; padding:3rem; color:var(--text-muted);">
+              <i class="fa-solid fa-folder-open" style="font-size:2.5rem; margin-bottom:1rem; opacity:0.3;"></i>
+              <p>No hay solicitudes pendientes en esta dependencia.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      filtered.forEach(req => {
+        const apellidos = [req.apellidoPaterno, req.apellidoMaterno].filter(Boolean).join(' ');
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td style="font-weight:700; color:var(--color-primary);">${req.id}</td>
+          <td>
+            <div style="font-weight:600; color:var(--text-main);">${req.nombres} ${apellidos}</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">Cód: ${req.codigoAlumno || '-'} | DNI: ${req.dni}</div>
+          </td>
+          <td style="max-width:200px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">${req.procedureName || ''}</td>
+          <td><span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">${req.office}</span></td>
+          <td style="font-weight:700; color:var(--color-success);">S/. ${Number(req.monto).toFixed(2)}</td>
+          <td>
+            <span class="status-badge ${req.status.toLowerCase().replace(/ /g, "_")}">
+              ${req.status}
+            </span>
+          </td>
+          <td>
+            <button class="btn-action-icon" onclick="openAdminModal('${req.id}')" title="Calificar expediente">
+              <i class="fa-solid fa-stamp"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openAdminModal(id) {
+      const request = adminSolicitudes.find(r => r.id === id);
+      if (!request) return;
+
+      const apellidos = [request.apellidoPaterno, request.apellidoMaterno].filter(Boolean).join(' ');
+
+      currentAdminRequestId = id;
+      document.getElementById("admin-modal-id").innerText = request.id;
+      document.getElementById("admin-modal-student").innerText = `${request.nombres} ${apellidos}`;
+      document.getElementById("admin-modal-proc-name").innerText = request.procedureName || '';
+      document.getElementById("admin-modal-student-meta").innerText = `Código: ${request.codigoAlumno || '-'} | DNI: ${request.dni} | Correo: ${request.email || '-'}`;
+      document.getElementById("admin-modal-voucher").innerText = request.voucher || "Sin registrar";
+      document.getElementById("admin-modal-cost").innerText = `S/. ${Number(request.monto).toFixed(2)}`;
+
+      const filesContainer = document.getElementById("admin-modal-files");
+      filesContainer.innerHTML = "";
+      if (!request.files.length) {
+        filesContainer.innerHTML = `<p style="color:var(--text-muted); font-size:0.85rem;">No se adjuntaron archivos digitales.</p>`;
+      }
+      request.files.forEach(f => {
+        const badge = document.createElement("div");
+        badge.className = "file-badge";
+        badge.innerHTML = `
+          <div class="file-name">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>${f.nombreOriginal || f.archivo}</span>
+          </div>
+          <button type="button" class="btn btn-secondary" style="padding: 0.25rem 0.6rem; font-size:0.75rem;" onclick="window.open('/uploads/${f.archivo}', '_blank')">
+            <i class="fa-solid fa-eye"></i> Ver
+          </button>
+        `;
+        filesContainer.appendChild(badge);
+      });
+
+      document.getElementById("admin-change-status").value = request.status;
+      document.getElementById("admin-action-modal").classList.add("open");
+    }
+
+    function closeAdminModal() {
+      document.getElementById("admin-action-modal").classList.remove("open");
+    }
+
+    async function saveAdminResolution() {
+      const newStatus = document.getElementById("admin-change-status").value;
+      const request = adminSolicitudes.find(r => r.id === currentAdminRequestId);
+      if (!request) return;
+
+      if (request.status === newStatus) {
+        closeAdminModal();
+        return;
+      }
+
+      try {
+        const res = await adminFetch(`/api/solicitudes/${currentAdminRequestId}/estado`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ estado: newStatus })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'No se pudo actualizar el expediente.');
+
+        closeAdminModal();
+        await refreshAdminData();
+        alert(`Expediente ${data.id} calificado exitosamente como ${data.status}.`);
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // STATS & REPORTS
+    // -------------------------------------------------------------
+    async function updateDashboardStats() {
+      try {
+        const res = await adminFetch('/api/dashboard/stats');
+        const stats = await res.json();
+        if (!res.ok) throw new Error(stats.error || 'No se pudieron cargar las estadísticas.');
+
+        document.getElementById("stat-total-requests").innerText = stats.total;
+        document.getElementById("stat-pending-requests").innerText = stats.enProceso;
+        document.getElementById("stat-paid-requests").innerText = stats.pagado;
+        document.getElementById("stat-closed-requests").innerText = stats.cerrado;
+
+        renderOfficeBarChart(stats.porOficina);
+        renderStatusDonut(stats);
+      } catch (err) {
+        console.error(err.message);
+      }
+    }
+
+    function renderOfficeBarChart(porOficina) {
+      const container = document.getElementById('office-bar-chart');
+      if (!container) return;
+      if (!porOficina || !porOficina.length) {
+        container.innerHTML = '<p style="color:var(--text-muted); text-align:center; width:100%;">Aún no hay datos suficientes.</p>';
+        return;
+      }
+      const max = Math.max(...porOficina.map(o => o.total), 1);
+      container.innerHTML = porOficina.slice(0, 6).map(o => {
+        const heightPx = Math.max(8, Math.round((o.total / max) * 160));
+        return `
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar" style="height: ${heightPx}px;" data-val="${o.total}"></div>
+            <div class="chart-label">${o.office}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderStatusDonut(stats) {
+      const legend = document.getElementById('status-donut-legend');
+      const donut = document.getElementById('status-donut-graphic');
+      if (!legend || !donut) return;
+
+      const segments = [
+        { label: 'Solicitado', value: stats.solicitado, color: 'var(--color-primary)' },
+        { label: 'En Proceso', value: stats.enProceso, color: 'var(--color-warning)' },
+        { label: 'Pagado', value: stats.pagado, color: 'var(--color-secondary)' },
+        { label: 'Cerrado', value: stats.cerrado, color: 'var(--color-success)' },
+        { label: 'Anulado', value: stats.anulado, color: '#94a3b8' }
+      ];
+      const total = stats.total || 1;
+
+      legend.innerHTML = segments.map(s => `
+        <div class="legend-item">
+          <div class="legend-color" style="background:${s.color}"></div>
+          <span>${s.label} (${Math.round((s.value / total) * 100)}%)</span>
+        </div>
+      `).join('');
+
+      let acc = 0;
+      const stops = segments.map(s => {
+        const start = (acc / total) * 360;
+        acc += s.value;
+        const end = (acc / total) * 360;
+        return `${s.color} ${start}deg ${end}deg`;
+      }).join(', ');
+      donut.style.background = `conic-gradient(${stops})`;
+    }
+
+    async function simulateReportDownload() {
+      try {
+        const res = await adminFetch('/api/dashboard/export.csv');
+        if (!res.ok) throw new Error('No se pudo generar el reporte.');
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Reporte_TUPA_UNSAAC.csv';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        alert('Reporte general exportado y descargado en formato CSV compatible con Microsoft Excel.');
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+  </script>
+</body>
+</html>

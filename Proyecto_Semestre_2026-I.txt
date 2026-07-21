@@ -1,0 +1,356 @@
+
+
+ 
+UNIVERSIDAD NACIONAL DE SAN ANTONIO ABAD DEL CUSCO 
+PROGRAMA ACADÉMICO DE INGENIERÍA INFORMÁTICA Y DE SISTEMAS 
+PROYECTO SEMESTRAL 2026 - I 
+ 
+Asignatura: Desarrollo De Software I 
+Docentes responsables: - Luis Álvaro Monzón Condori 
+- Julio Vladimir Quispe Sota 
+Atributo del graduado a medir: AG_C12 - Aplica Teoría de la Ciencia de la Computación 
+Aplica  la  teoría  de  la  ciencia  de  la  computación  y  los 
+fundamentos   de   desarrollo   de   software   para   producir 
+soluciones basados en computadora. 
+ 
+1.1. TÍTULO DEL PROYECTO: 
+Plataforma Web para la Optimización de la Gestión del TUPA de la UNSAAC.  
+ 
+1.2. DESCRIPCIÓN DEL PROBLEMA: 
+Actualmente,   la   UNSAAC   cuenta   con   un   sistema   para   la   gestión   de   procedimientos 
+administrativos del TUPA (Texto Único de Procedimientos Administrativos). Sin embargo, dicho 
+sistema presenta limitaciones en cuanto a accesibilidad, seguimiento de trámites, organización 
+de la información y experiencia de usuario, lo que dificulta una gestión eficiente tanto para los 
+estudiantes como para el personal administrativo. 
+Muchos  usuarios  presentan  inconvenientes  al  momento  de  consultar  requisitos,  registrar 
+solicitudes  o  verificar  el  estado  de  sus  trámites,  generando  demoras,  confusión  y  constantes 
+consultas presenciales. Asimismo, algunos procesos administrativos aún requieren validaciones 
+manuales o carecen de una integración adecuada entre las diferentes oficinas responsables. 
+Esta situación ocasiona retrasos en la atención, sobrecarga administrativa y una experiencia poco 
+eficiente para la comunidad universitaria. Por ello, surge la necesidad de optimizar la plataforma 
+existente mediante una solución web más moderna, intuitiva y centralizada que permita mejorar 
+la gestión de los procedimientos administrativos de la UNSAAC. 
+ 
+1.3. OBJETIVOS DEL PROYECTO:  
+1.3.1. OBJETIVO GENERAL: 
+Desarrollar  una  Plataforma  web de  gestión  del  TUPA  de  la  UNSAAC  para  mejorar  la 
+administración de trámites, el acceso a la información y el seguimiento de procedimientos 
+administrativos. 
+ 
+1.3.2. OBJETIVOS ESPECÍFICOS: 
+1. Mejorar la interfaz y experiencia de usuario de la plataforma actual. 
+2. Facilitar la consulta de procedimientos, requisitos y costos del TUPA. 
+3. Optimizar el registro y seguimiento de trámites administrativos. 
+4. Implementar notificaciones sobre el estado de los procedimientos. 
+5. Mejorar la gestión y validación de documentos digitales. 
+6. Implementar un panel de control más eficiente para las oficinas administrativas. 
+7. Generar reportes y estadísticas de trámites procesados. 
+8. Garantizar accesibilidad y disponibilidad de la plataforma web 
+  
+
+ 
+UNIVERSIDAD NACIONAL DE SAN ANTONIO ABAD DEL CUSCO 
+PROGRAMA ACADÉMICO DE INGENIERÍA INFORMÁTICA Y DE SISTEMAS 
+ 
+1.4. ENTREGABLES Y CRONOGRAMA: 
+ 
+1. PRIMERA UNIDAD: 
+1.1. Plan de Proyecto - Entrega semestral Nro. 01: 28-05-2026 
+El grupo de trabajo adquiere y formula las especificaciones del software aplicando los 
+principios de ingeniería de requerimientos, en este proceso se plantea y presenta. 
+ 
+El plan de proyecto debe contener como mínimo: 
+ 
+- Carátula 
+- Presentación 
+- Ámbito de aplicación o influencia 
+- Descripción de la problemática 
+- Objetivos de la propuesta 
+- General 
+- Específico 
+- Metodología 
+- Metodología 
+- Actividades principales 
+- Infraestructura y recursos 
+- Evaluación y monitoreo 
+- Resultados esperados 
+- Participantes 
+- Equipo interno 
+- Equipo externo 
+- Aspectos administrativos 
+- Cronograma 
+- Presupuesto 
+- Prototipado 
+- Prototipado dinámico 
+ 
+1.2. Implementación de las GUIs - Entrega semestral Nro. 02: 28-05-2026  
+El  grupo  de  trabajo  utiliza  una  metodología  y/o marco  de  trabajo  en  el  diseño  de 
+software  para  lograr  una  arquitectura  consistente  con  las  especificaciones.  Se 
+presenta: 
+- Creación de las interfaces 
+- Diseño de las bases de datos 
+- Uso de Git para el control de versionamiento 
+- Documentación del avance del proyecto 
+  
+
+ 
+UNIVERSIDAD NACIONAL DE SAN ANTONIO ABAD DEL CUSCO 
+PROGRAMA ACADÉMICO DE INGENIERÍA INFORMÁTICA Y DE SISTEMAS 
+2. SEGUNDA UNIDAD: 
+ 
+2.1. Desarrollo de la aplicación- Entrega semestral Nro. 03: __/___/___ 
+El   grupo   de   trabajo   desarrolla   software   utilizando   estándares,   herramientas 
+pertinentes y principios de ciencias de la computación. 
+El  grupo  de  trabajo  realiza pruebas  de  software  en  función  a  las  especificaciones 
+establecidas. 
+Se presenta: 
+- Implementación del sistema web de solicitud de trámites. 
+- Desarrollo de módulos de mantenimiento 
+- Optimización y mejora del diseño. 
+- Despliegue de la aplicación en un servidor en la nube. 
+- Documentación final del proyecto. 
+ 
+1.5. INSTRUCCIONES: 
+- Investigación y planificación: Antes de comenzar, cada equipo deberá investigar plataformas 
+similares y definir los requerimientos de su solución. 
+- Implementación modular: Se recomienda trabajar en módulos  independientes  que  luego 
+serán integrados. 
+- Control de versiones: Todo el código deberá ser gestionado a través de GitHub, con un flujo 
+de trabajo colaborativo. 
+- Pruebas y depuración: Cada funcionalidad debe ser probada antes de integrarse al proyecto 
+final. 
+- Presentación final: Los equipos deberán realizar una demostración   funcional   de   la 
+plataforma desarrollada. 
+ 
+1.6. NÙMERO DE INTEGRANTES: 2 a 3 alumnos por grupo. 
+ 
+
+ 
+UNIVERSIDAD NACIONAL DE SAN ANTONIO ABAD DEL CUSCO 
+PROGRAMA ACADÉMICO DE INGENIERÍA INFORMÁTICA Y DE SISTEMAS 
+RÚBRICA PARA EVALUACIÓN DE ATRIBUTO DEL GRADUADO 
+ 
+AG_C12 Aplica  teoría  de  CC. Aplica  la  teoría  de  la  ciencia  de  la  computación  y  los 
+fundamentos  de  desarrollo  de  software  para  producir  soluciones  basados  en 
+computadora.        . 
+Indicadores de 
+desempeño 
+Niveles 
+Avanzado (5) Logrado (4) En desarrollo (3) Inicial (2) 
+AG-C12.01  
+Adquiere y formula 
+las especificaciones 
+de un software 
+aplicando los 
+principios de 
+ingeniería de 
+requerimientos 
+Adquiere y 
+formula 
+correctamente las 
+especificaciones 
+de un software 
+aplicando de 
+manera integral 
+los principios de 
+ingeniería de 
+requerimientos. 
+Adquiere y formula 
+correctamente las 
+especificaciones de 
+un software 
+aplicando la mayoría 
+de los principios de 
+ingeniería de 
+requerimientos. 
+Adquiere y 
+formula 
+parcialmente las 
+especificaciones 
+de un software 
+aplicando algunos 
+los principios de 
+ingeniería de 
+requerimientos. 
+Adquiere y 
+formula de 
+manera confusa 
+e incompleta las 
+especificaciones 
+de un software 
+sin aplicar los 
+principios de 
+ingeniería de 
+requerimientos. 
+AG-C12.02  
+Utiliza una 
+metodología y/o 
+marco de trabajo en 
+el diseño de software 
+para lograr una 
+arquitectura 
+consistente con las 
+especificaciones 
+Utiliza 
+adecuadamente 
+una metodología 
+de diseño de 
+software y/o 
+marco de 
+trabajo en el 
+diseño de 
+software para 
+lograr una 
+arquitectura 
+consistente con 
+la totalidad de 
+las 
+especificaciones 
+de usuario y una 
+documentación 
+completa. 
+Utiliza 
+adecuadamente una 
+metodología de 
+diseño de software 
+y/o marco de trabajo 
+en el diseño de 
+software para lograr 
+una arquitectura 
+consistente con la 
+totalidad de las 
+especificaciones de 
+usuario y una 
+documentación 
+parcial. 
+Utiliza con cierta 
+claridad una 
+metodología de 
+diseño de software 
+y/o marco de 
+trabajo en el diseño 
+de software para 
+lograr una 
+arquitectura 
+consistente con 
+algunas 
+especificaciones de 
+usuario y una 
+documentación 
+básica. 
+Utiliza 
+inadecuadamen
+te una 
+metodología de 
+diseño de 
+software y/o 
+marco de 
+trabajo en el 
+diseño de 
+software para 
+lograr una 
+arquitectura no 
+consistente con 
+las 
+especificaciones 
+de usuario y 
+una 
+documentación 
+escasa. 
+AG-C12.03  
+Desarrolla software 
+utilizando 
+estándares, 
+herramientas 
+pertinentes y 
+principios de ciencias 
+de la computación. 
+Desarrolla 
+software 
+funcional 
+utilizando 
+estándares y 
+herramientas 
+pertinentes que 
+cumplan con la 
+totalidad de los 
+requerimientos. 
+Desarrolla software 
+funcional utilizando 
+estándares y 
+herramientas 
+pertinentes que 
+cumplan con la 
+mayoría de los 
+requerimientos. 
+Desarrolla software 
+con funcionalidad 
+básica con 
+estándares no muy 
+claros y /o 
+herramientas 
+pertinentes y que 
+cumplen con 
+algunos 
+requerimientos. 
+Desarrolla 
+software con 
+funcionalidad 
+básica sin 
+utilizar 
+estándares 
+claros y /o 
+herramientas 
+pertinentes y 
+que no cumplan 
+con los 
+requerimientos. 
+
+ 
+UNIVERSIDAD NACIONAL DE SAN ANTONIO ABAD DEL CUSCO 
+PROGRAMA ACADÉMICO DE INGENIERÍA INFORMÁTICA Y DE SISTEMAS 
+AG-C12.04  
+Realiza pruebas de 
+software en función a 
+las especificaciones 
+establecidas 
+Realiza pruebas 
+de software para 
+la totalidad de 
+especificaciones 
+del software y 
+elabora un 
+informe 
+completo. 
+Realiza pruebas de 
+software para la 
+mayoría de las 
+especificaciones del 
+software y elabora 
+un informe parcial. 
+Realiza pruebas de 
+software para 
+algunas 
+especificaciones del 
+software y elabora 
+un informe 
+incompleto. 
+Realiza pruebas 
+de software que 
+no cumplen con 
+las 
+especificaciones 
+del software sin 
+un informe 
+adecuado, por 
+lo que no se 
+puede 
+contrastar con 
+el cumplimiento 
+de 
+especificaciones
+. 
+ 
+Cusco, 19 de mayo de 2026 
+ 
+ 

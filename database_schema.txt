@@ -1,0 +1,484 @@
+--- TABLE SCHEMA ---
+CREATE TABLE `tagrupadormodulo` (
+  `nidtagrupadormodulo` int NOT NULL AUTO_INCREMENT,
+  `cdescripcionagrupador` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `ciconoagrupador` varchar(45) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`nidtagrupadormodulo`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `talumno` (
+  `codigoalumno` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `apalumno` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `amalumno` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombresalumno` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dni` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `usuario` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `activo` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'SI',
+  `ultimoacceso` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `observacion_al` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sexoalumno` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fechanac` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `direccion` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telefono` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `foto` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `curricula` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `codigoespecialidad` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `codigosede` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`codigoalumno`),
+  KEY `fk_cosede` (`codigosede`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `talumnocalca` (
+  `codigoalumno` varchar(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
+  `apalumno` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `amalumno` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `nombresalumno` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `dni` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `usuario` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `password` varchar(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `activo` varchar(2) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `ultimoacceso` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `observacion_al` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `sexoalumno` varchar(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `fechanac` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `direccion` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `telefono` varchar(9) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `foto` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `curricula` varchar(4) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `codigoespecialidad` varchar(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `codigosede` varchar(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `talumnochecacupe` (
+  `codigoalumno` varchar(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
+  `apalumno` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `amalumno` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `nombresalumno` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `dni` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `usuario` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `password` varchar(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `activo` varchar(2) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `ultimoacceso` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `observacion_al` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `sexoalumno` varchar(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `fechanac` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `direccion` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `telefono` varchar(9) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `foto` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `curricula` varchar(4) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `codigoespecialidad` varchar(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `codigosede` varchar(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `talumnocusco` (
+  `codigoalumno` varchar(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
+  `apalumno` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `amalumno` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `nombresalumno` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `dni` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `usuario` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `password` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `activo` varchar(2) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT 'SI',
+  `ultimoacceso` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `observacion_al` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `sexoalumno` varchar(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `fechanac` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `direccion` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `telefono` varchar(9) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `foto` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `curricula` varchar(4) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `codigoespecialidad` varchar(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `codigosede` varchar(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tcatalogotramite` (
+  `ccodigo` varchar(20) NOT NULL,
+  `cdenominaciontramite` varchar(200) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `cdescripcion` varchar(1000) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `ccodigobanco` varchar(10) DEFAULT NULL,
+  `btienemontofijo` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`ccodigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tcomisionbanco` (
+  `nidtcomisionbanco` int NOT NULL AUTO_INCREMENT,
+  `dfechainicio` datetime DEFAULT NULL,
+  `dfechafin` datetime DEFAULT NULL,
+  `nmonto` decimal(10,2) DEFAULT NULL,
+  `ccodigoespecifica` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`nidtcomisionbanco`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tcomisionbancoaplicacion` (
+  `nidtcomisionbancoaplicacion` int NOT NULL AUTO_INCREMENT,
+  `nidtsolicitudtramite` bigint DEFAULT NULL,
+  `nidtcomisionbanco` int DEFAULT NULL,
+  `cdescripcion` text,
+  `nmontocomision` decimal(10,2) DEFAULT NULL,
+  `ccodigoespecifica` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`nidtcomisionbancoaplicacion`),
+  KEY `nidtsolicitudtramite` (`nidtsolicitudtramite`),
+  KEY `nidtcomisionbanco` (`nidtcomisionbanco`),
+  CONSTRAINT `tcomisionbancoaplicacion_ibfk_1` FOREIGN KEY (`nidtsolicitudtramite`) REFERENCES `tsolicitudtramite` (`nidtsolicitudtramite`),
+  CONSTRAINT `tcomisionbancoaplicacion_ibfk_2` FOREIGN KEY (`nidtcomisionbanco`) REFERENCES `tcomisionbanco` (`nidtcomisionbanco`)
+) ENGINE=InnoDB AUTO_INCREMENT=1670 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tcomprobantepago` (
+  `cnumerocomprobante` varchar(10) NOT NULL,
+  `nidtserieunidadtramite` int DEFAULT NULL,
+  `cserie` varchar(6) NOT NULL,
+  `nidtdependenciapago` int DEFAULT NULL,
+  `cidtusuario` varchar(10) DEFAULT NULL,
+  `dfechaemision` datetime DEFAULT NULL,
+  `cusuarioregistro` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`cnumerocomprobante`,`cserie`),
+  KEY `nidtdependenciapago` (`nidtdependenciapago`),
+  KEY `nidtserieunidadtramite` (`nidtserieunidadtramite`),
+  CONSTRAINT `tcomprobantepago_ibfk_1` FOREIGN KEY (`nidtdependenciapago`) REFERENCES `tunidadorganizativa` (`nidtunidadorganizativa`),
+  CONSTRAINT `tcomprobantepago_ibfk_2` FOREIGN KEY (`nidtserieunidadtramite`) REFERENCES `tserieunidadtramite` (`nidtserieunidadtramite`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tconfiguracion` (
+  `nidtconfiguracion` int NOT NULL AUTO_INCREMENT,
+  `cdescripcion` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`nidtconfiguracion`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tdetallecomprobantepago` (
+  `cnumerocomprobante` varchar(10) NOT NULL,
+  `cserie` varchar(6) NOT NULL,
+  `ccodigo` varchar(20) DEFAULT NULL,
+  `cdescripcionpago` varchar(100) DEFAULT NULL,
+  `ncantidad` int DEFAULT NULL,
+  PRIMARY KEY (`cnumerocomprobante`,`cserie`),
+  KEY `ccodigo` (`ccodigo`),
+  CONSTRAINT `tdetallecomprobantepago_ibfk_1` FOREIGN KEY (`cnumerocomprobante`, `cserie`) REFERENCES `tcomprobantepago` (`cnumerocomprobante`, `cserie`),
+  CONSTRAINT `tdetallecomprobantepago_ibfk_2` FOREIGN KEY (`ccodigo`) REFERENCES `tcatalogotramite` (`ccodigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tdetalleconfiguracion` (
+  `nidtdetalleconfiguracion` int NOT NULL AUTO_INCREMENT,
+  `nidtconfiguracion` int DEFAULT NULL,
+  `cdescripciondetalleconfiguracion` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`nidtdetalleconfiguracion`),
+  KEY `nidtconfiguracion` (`nidtconfiguracion`),
+  CONSTRAINT `tdetalleconfiguracion_ibfk_1` FOREIGN KEY (`nidtconfiguracion`) REFERENCES `tconfiguracion` (`nidtconfiguracion`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tdetalletramite` (
+  `nidtdetalletramite` int NOT NULL AUTO_INCREMENT,
+  `ccodigo` varchar(20) DEFAULT NULL,
+  `cdenominaciondetalle` varchar(300) DEFAULT NULL,
+  `cvalordetalle` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`nidtdetalletramite`),
+  KEY `ccodigo` (`ccodigo`),
+  CONSTRAINT `tdetalletramite_ibfk_1` FOREIGN KEY (`ccodigo`) REFERENCES `tcatalogotramite` (`ccodigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tespecialidad` (
+  `ccodigoespecialidad` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnombreespecialidad` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`ccodigoespecialidad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tespecifica` (
+  `ccodigoespecifica` varchar(20) NOT NULL,
+  `nidttipoespecifica` int NOT NULL,
+  `nidtiporeciboingreso` int DEFAULT NULL,
+  `ctipoespecifica` varchar(50) DEFAULT NULL,
+  `cdescripcionespecifica` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`ccodigoespecifica`),
+  KEY `nidttipoespecifica` (`nidttipoespecifica`),
+  KEY `nidtiporeciboingreso_idx` (`nidtiporeciboingreso`),
+  CONSTRAINT `nidtiporeciboingreso` FOREIGN KEY (`nidtiporeciboingreso`) REFERENCES `ttiporeciboingreso` (`nidtiporeciboingreso`),
+  CONSTRAINT `nidttipoespecifica` FOREIGN KEY (`nidttipoespecifica`) REFERENCES `tdetalleconfiguracion` (`nidtdetalleconfiguracion`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tespecificatramite` (
+  `ccodigoespecifica` varchar(20) NOT NULL,
+  `ccodigo` varchar(20) NOT NULL,
+  `dfechainicio` datetime DEFAULT NULL,
+  `dfechafin` datetime DEFAULT NULL,
+  `bvigente` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`ccodigoespecifica`,`ccodigo`),
+  KEY `ccodigo` (`ccodigo`),
+  CONSTRAINT `tespecificatramite_ibfk_1` FOREIGN KEY (`ccodigoespecifica`) REFERENCES `tespecifica` (`ccodigoespecifica`),
+  CONSTRAINT `tespecificatramite_ibfk_2` FOREIGN KEY (`ccodigo`) REFERENCES `tcatalogotramite` (`ccodigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tferiado` (
+  `nidtferidado` int NOT NULL AUTO_INCREMENT,
+  `dfecha` date NOT NULL,
+  `cdescripcion` varchar(100) DEFAULT NULL,
+  `brecurrente` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`nidtferidado`),
+  UNIQUE KEY `dfecha` (`dfecha`)
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tlogin` (
+  `clogin` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cidtusuario` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nidtperfil` int NOT NULL,
+  `dfechainicio` datetime DEFAULT NULL,
+  `dfechafin` datetime DEFAULT NULL,
+  `ccontrasenia` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`clogin`),
+  KEY `fk_tlogin_tperfil1_idx` (`nidtperfil`),
+  KEY `cidtusuario` (`cidtusuario`),
+  CONSTRAINT `fk_tlogin_tperfil1` FOREIGN KEY (`nidtperfil`) REFERENCES `tperfil` (`nidtperfil`),
+  CONSTRAINT `tlogin_ibfk_1` FOREIGN KEY (`cidtusuario`) REFERENCES `tusuario` (`cidtusuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tmenuperfil` (
+  `nidtmenuperfil` int NOT NULL AUTO_INCREMENT,
+  `nidtmodulo` int NOT NULL,
+  `nidtperfil` int NOT NULL,
+  PRIMARY KEY (`nidtmenuperfil`),
+  KEY `fk_tmenuperfil_tmodulo1_idx` (`nidtmodulo`),
+  KEY `fk_tmenuperfil_tperfil1_idx` (`nidtperfil`),
+  CONSTRAINT `fk_tmenuperfil_tmodulo1` FOREIGN KEY (`nidtmodulo`) REFERENCES `tmodulo` (`nidtmodulo`),
+  CONSTRAINT `fk_tmenuperfil_tperfil1` FOREIGN KEY (`nidtperfil`) REFERENCES `tperfil` (`nidtperfil`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tmodulo` (
+  `nidtmodulo` int NOT NULL AUTO_INCREMENT,
+  `nidtagrupadormodulo` int NOT NULL,
+  `cdescripcionmodulo` varchar(250) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `ciconomodulo` varchar(45) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `crutamodulo` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`nidtmodulo`),
+  KEY `fk_tmodulo_tagrupadormodulo1_idx` (`nidtagrupadormodulo`),
+  CONSTRAINT `fk_tmodulo_tagrupadormodulo1` FOREIGN KEY (`nidtagrupadormodulo`) REFERENCES `tagrupadormodulo` (`nidtagrupadormodulo`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tmontotramite` (
+  `nidtmontotramite` int NOT NULL AUTO_INCREMENT,
+  `ccodigo` varchar(20) NOT NULL,
+  `nmonto` decimal(10,2) DEFAULT NULL,
+  `cdescripcionpago` varchar(300) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `dfechainicio` datetime DEFAULT NULL,
+  `dfechafin` datetime DEFAULT NULL,
+  PRIMARY KEY (`nidtmontotramite`),
+  KEY `fk_tmontotramite_tcatalogotramite_idx` (`ccodigo`),
+  CONSTRAINT `fk_tmontotramite_tcatalogotramite` FOREIGN KEY (`ccodigo`) REFERENCES `tcatalogotramite` (`ccodigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tperfil` (
+  `nidtperfil` int NOT NULL AUTO_INCREMENT,
+  `cdescripcionperfil` varchar(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`nidtperfil`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `treciboingreso` (
+  `nidtreciboingreso` int NOT NULL AUTO_INCREMENT,
+  `nnrorecibo` int DEFAULT NULL,
+  `nanio` int DEFAULT NULL,
+  `nidtiporeciboingreso` int DEFAULT NULL,
+  `clogin` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dfecharecibo` datetime DEFAULT NULL,
+  `cnumerosiaf` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dfecharegistro` datetime DEFAULT NULL,
+  `cobservacion` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cnotapago` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cexpedientesiaf` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cordenservicio` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cruc` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cproveedor` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cfactura` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cguiaremision` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `crubro` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ccorrelativocut` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ctiporubro` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`nidtreciboingreso`),
+  KEY `nidtiporeciboingreso` (`nidtiporeciboingreso`),
+  KEY `clogin` (`clogin`),
+  CONSTRAINT `treciboingreso_ibfk_1` FOREIGN KEY (`nidtiporeciboingreso`) REFERENCES `ttiporeciboingreso` (`nidtiporeciboingreso`),
+  CONSTRAINT `treciboingreso_ibfk_2` FOREIGN KEY (`clogin`) REFERENCES `tlogin` (`clogin`)
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `treciboingresodetalle` (
+  `nidtreciboingresodetalle` int NOT NULL AUTO_INCREMENT,
+  `nidtreciboingreso` int DEFAULT NULL,
+  `nidtsolicitudtramitedetalle` int DEFAULT NULL,
+  `ccodigoespecifica` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ccodigo` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nmontotramite` decimal(10,2) DEFAULT NULL,
+  `ctransaccion` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`nidtreciboingresodetalle`),
+  KEY `nidtreciboingreso` (`nidtreciboingreso`),
+  KEY `nidtsolicitudtramitedetalle` (`nidtsolicitudtramitedetalle`),
+  CONSTRAINT `treciboingresodetalle_ibfk_1` FOREIGN KEY (`nidtreciboingreso`) REFERENCES `treciboingreso` (`nidtreciboingreso`),
+  CONSTRAINT `treciboingresodetalle_ibfk_2` FOREIGN KEY (`nidtsolicitudtramitedetalle`) REFERENCES `tsolicitudtramitedetalle` (`nidtsolicitudtramitedetalle`)
+) ENGINE=InnoDB AUTO_INCREMENT=2355 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `trequisitotramite` (
+  `nidtrequisitotramite` int NOT NULL AUTO_INCREMENT,
+  `ccodigo` varchar(20) NOT NULL,
+  `cdescripcionrequisito` varchar(400) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`nidtrequisitotramite`),
+  KEY `fk_trequisitotramite_tcatalogotramite1_idx` (`ccodigo`),
+  CONSTRAINT `fk_trequisitotramite_tcatalogotramite1` FOREIGN KEY (`ccodigo`) REFERENCES `tcatalogotramite` (`ccodigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tserieunidadtramite` (
+  `nidtserieunidadtramite` int NOT NULL AUTO_INCREMENT,
+  `cserie` varchar(6) DEFAULT NULL,
+  `nidtunidadorganizativa` int DEFAULT NULL,
+  `bvigente` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`nidtserieunidadtramite`),
+  KEY `nidtunidadorganizativa` (`nidtunidadorganizativa`),
+  CONSTRAINT `tserieunidadtramite_ibfk_1` FOREIGN KEY (`nidtunidadorganizativa`) REFERENCES `tunidadorganizativa` (`nidtunidadorganizativa`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tsolicitante` (
+  `ccodigosolicitante` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnumerodocumento` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cnombres` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `capellidopaterno` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `capellidomaterno` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`ccodigosolicitante`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tsolicitanteespecialidad` (
+  `ccodigosolicitante` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnumerodocumento` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ccodigoespecialidad` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnombreespecialidad` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`ccodigosolicitante`,`ccodigoespecialidad`),
+  KEY `ccodigoespecialidad` (`ccodigoespecialidad`),
+  CONSTRAINT `tsolicitanteespecialidad_ibfk_1` FOREIGN KEY (`ccodigosolicitante`) REFERENCES `tsolicitante` (`ccodigosolicitante`),
+  CONSTRAINT `tsolicitanteespecialidad_ibfk_2` FOREIGN KEY (`ccodigoespecialidad`) REFERENCES `tespecialidad` (`ccodigoespecialidad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tsolicitudtramite` (
+  `nidtsolicitudtramite` bigint NOT NULL AUTO_INCREMENT,
+  `ccodigosolicitante` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nidttiposolicitante` int NOT NULL,
+  `dfechapeticion` datetime NOT NULL,
+  `dfecharegistro` datetime NOT NULL,
+  `ccomprobantepath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cnumerotransaccion` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dfechatransaccion` datetime DEFAULT NULL,
+  `dhoratransaccion` datetime DEFAULT NULL,
+  `cestado` enum('SOLICITADO','EN PROCESO','PAGADO','ANULADO','CERRADO','PAGADO SIN ADJUNTO') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'SOLICITADO',
+  `cidtsolicitudtramite` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nnumerotramite` int DEFAULT NULL,
+  `dfechainiciovigencia` datetime DEFAULT NULL,
+  `dfechafinvigencia` datetime DEFAULT NULL,
+  `dfechasubidoarchivo` datetime DEFAULT NULL,
+  `dfechapago` datetime DEFAULT NULL,
+  `cnumerorecibocaja` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`nidtsolicitudtramite`),
+  KEY `tsolicitudtramite_ibfk_3` (`nidttiposolicitante`),
+  KEY `ccodigosolicitante` (`ccodigosolicitante`),
+  CONSTRAINT `tsolicitudtramite_ibfk_3` FOREIGN KEY (`nidttiposolicitante`) REFERENCES `tdetalleconfiguracion` (`nidtdetalleconfiguracion`),
+  CONSTRAINT `tsolicitudtramite_ibfk_4` FOREIGN KEY (`ccodigosolicitante`) REFERENCES `tsolicitante` (`ccodigosolicitante`)
+) ENGINE=InnoDB AUTO_INCREMENT=2203 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tsolicitudtramitedetalle` (
+  `nidtsolicitudtramitedetalle` int NOT NULL AUTO_INCREMENT,
+  `nidtsolicitudtramite` bigint NOT NULL,
+  `ccodigo` varchar(20) DEFAULT NULL,
+  `nidtmontotramite` int DEFAULT NULL,
+  `ncantidad` int DEFAULT NULL,
+  `cdescripcion` text,
+  `nmontotramite` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`nidtsolicitudtramitedetalle`),
+  KEY `ccodigo` (`ccodigo`),
+  KEY `nidtmontotramite` (`nidtmontotramite`),
+  KEY `nidtsolicitudtramite` (`nidtsolicitudtramite`),
+  CONSTRAINT `tsolicitudtramitedetalle_ibfk_1` FOREIGN KEY (`ccodigo`) REFERENCES `tcatalogotramite` (`ccodigo`),
+  CONSTRAINT `tsolicitudtramitedetalle_ibfk_2` FOREIGN KEY (`nidtmontotramite`) REFERENCES `tmontotramite` (`nidtmontotramite`),
+  CONSTRAINT `tsolicitudtramitedetalle_ibfk_3` FOREIGN KEY (`nidtsolicitudtramite`) REFERENCES `tsolicitudtramite` (`nidtsolicitudtramite`)
+) ENGINE=InnoDB AUTO_INCREMENT=3806 DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `ttiporeciboingreso` (
+  `nidtiporeciboingreso` int NOT NULL AUTO_INCREMENT,
+  `cdescripcion` varchar(250) DEFAULT NULL,
+  `cfuentefinanciamiento` varchar(50) DEFAULT NULL,
+  `crubro` varchar(300) DEFAULT NULL,
+  `ctiporecurso` varchar(300) DEFAULT NULL,
+  `ctipooperacion` varchar(200) DEFAULT NULL,
+  `ccuentabanco` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`nidtiporeciboingreso`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `ttoken` (
+  `cidtsesion` varchar(20) NOT NULL,
+  `cusuario` varchar(20) DEFAULT NULL,
+  `ctoken` varchar(200) DEFAULT NULL,
+  `cestado` varchar(200) DEFAULT NULL,
+  `dfechatoken` datetime DEFAULT NULL,
+  PRIMARY KEY (`cidtsesion`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tunidadorganizativa` (
+  `nidtunidadorganizativa` int NOT NULL AUTO_INCREMENT,
+  `cnombreunidadorganizativa` varchar(250) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`nidtunidadorganizativa`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tunidadtramite` (
+  `ccodigo` varchar(20) NOT NULL,
+  `nidtunidadorganizativa` int NOT NULL,
+  PRIMARY KEY (`ccodigo`,`nidtunidadorganizativa`),
+  KEY `nidtunidadorganizativa` (`nidtunidadorganizativa`),
+  CONSTRAINT `tunidadtramite_ibfk_1` FOREIGN KEY (`ccodigo`) REFERENCES `tcatalogotramite` (`ccodigo`),
+  CONSTRAINT `tunidadtramite_ibfk_2` FOREIGN KEY (`nidtunidadorganizativa`) REFERENCES `tunidadorganizativa` (`nidtunidadorganizativa`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--- TABLE SCHEMA ---
+CREATE TABLE `tusuario` (
+  `cidtusuario` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nidttipousuario` int DEFAULT NULL,
+  `cdni` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ccodigo` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cnombres` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cpaterno` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cmaterno` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ccorreo` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dfechanacimiento` datetime DEFAULT NULL,
+  `ctelefono` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`cidtusuario`),
+  KEY `nidttipousuario` (`nidttipousuario`),
+  CONSTRAINT `tusuario_ibfk_1` FOREIGN KEY (`nidttipousuario`) REFERENCES `tdetalleconfiguracion` (`nidtdetalleconfiguracion`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+

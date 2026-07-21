@@ -1,0 +1,26 @@
+{
+  "name": "unsaac-tupa-platform",
+  "version": "2.0.0",
+  "description": "Plataforma Web para la Optimización de la Gestión del TUPA de la UNSAAC",
+  "main": "backend/src/server.js",
+  "scripts": {
+    "start": "node backend/src/server.js",
+    "dev": "node --watch backend/src/server.js",
+    "db:import": "node backend/src/scripts/importDump.js",
+    "db:migrate": "node backend/src/scripts/migrate.js",
+    "db:seed": "node backend/src/scripts/seedDemoUsers.js",
+    "setup": "npm run db:import && npm run db:migrate && npm run db:seed"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^2.0.1",
+    "mysql2": "^3.11.0",
+    "pdf-parse": "^1.1.1",
+    "puppeteer-core": "^25.1.0"
+  }
+}

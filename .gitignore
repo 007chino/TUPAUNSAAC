@@ -1,0 +1,13 @@
+node_modules/
+.env
+uploads/*
+!uploads/.gitkeep
+payments.json
+npm-debug.log*
+*.log
+.DS_Store
+
+# Dump oficial de la UNSAAC: contiene datos reales de alumnos (nombres, DNI)
+# y hashes de contraseñas de cuentas administrativas. No se versiona en un
+# repositorio público. Ver README.md > "Aviso de datos y privacidad".
+bdtupa20260511.sql
