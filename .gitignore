@@ -11,3 +11,23 @@ npm-debug.log*
 # y hashes de contraseñas de cuentas administrativas. No se versiona en un
 # repositorio público. Ver README.md > "Aviso de datos y privacidad".
 bdtupa20260511.sql
+
+# Documentación académica, informes y material de exposición: uso interno
+# del curso, no forma parte del código fuente de la plataforma.
+DOCUMENTACION_INGENIERIA.md
+ESTRATEGIA_PRODUCTO_MERCADO.md
+PLAN_PROYECTO.md
+RECOMENDACIONES_DESARROLLO.md
+Proyecto_Semestre_2026-I.txt
+database_schema.txt
+*.pdf
+
+# Scripts auxiliares de generación de informes y datos, no forman parte
+# del backend/frontend que se despliega.
+generate_avances.js
+generate_guion.js
+generate_informe.js
+scratch_parse_data.js
+scratch_parse_pdf.js
+scratch_schema.js
+public/extracted_tupa_data.json
