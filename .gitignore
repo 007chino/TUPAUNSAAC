@@ -27,6 +27,9 @@ database_schema.txt
 generate_avances.js
 generate_guion.js
 generate_informe.js
+generate_guion_final.js
+generate_informe_final.js
+generate_diagramas.js
 scratch_parse_data.js
 scratch_parse_pdf.js
 scratch_schema.js
