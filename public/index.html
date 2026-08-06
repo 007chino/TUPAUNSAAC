@@ -1868,6 +1868,9 @@
     </div>
   </div>
 
+  <!-- Funciones puras reutilizadas y cubiertas por pruebas unitarias (ver tests/frontend) -->
+  <script src="js/utils.js"></script>
+
   <!-- ==========================================
        JAVASCRIPT LOGIC & DATABASE SIMULATOR
        ========================================== -->
@@ -2186,17 +2189,9 @@
     }
 
     function filterCatalog() {
-      const query = document.getElementById("catalog-search-box").value.toLowerCase();
+      const query = document.getElementById("catalog-search-box").value;
       const office = document.getElementById("catalog-office-filter").value;
-
-      const filtered = catalog.filter(item => {
-        const matchesQuery = item.denominacion.toLowerCase().includes(query) || 
-                             item.descripcion.toLowerCase().includes(query) || 
-                             String(item.codigo).toLowerCase().includes(query);
-        const matchesOffice = office === "" || item.office === office;
-        return matchesQuery && matchesOffice;
-      });
-
+      const filtered = TupaUtils.filterCatalogItems(catalog, query, office);
       renderCatalog(filtered);
     }
 
@@ -2498,9 +2493,17 @@
       if (!item) return;
 
       const checkboxes = document.querySelectorAll('#form-requisite-checklist input[type="checkbox"]');
-      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-      if (checkboxes.length > 0 && !allChecked) {
-        alert('Debes confirmar todos los requisitos obligatorios antes de enviar.');
+      const requisitesChecked = Array.from(checkboxes).filter(cb => cb.checked).length;
+
+      const validation = TupaUtils.validateSolicitudForm({
+        dni: document.getElementById("student-dni").value.trim(),
+        nombres: document.getElementById("student-names").value.trim(),
+        apellidoPaterno: document.getElementById("student-apellido-paterno").value.trim(),
+        requisitesTotal: checkboxes.length,
+        requisitesChecked
+      });
+      if (!validation.valid) {
+        alert(validation.error);
         return;
       }
 
@@ -2570,17 +2573,8 @@
       resultBox.style.display = "block";
 
       // Render request metadata card and step timeline
-      const statusLabels = {
-        "SOLICITADO": { label: "SOLICITADO", icon: "fa-folder-open" },
-        "EN PROCESO": { label: "EN EVALUACIÓN", icon: "fa-hourglass-half" },
-        "PAGADO": { label: "PAGO COMPROBADO", icon: "fa-credit-card" },
-        "PAGADO SIN ADJUNTO": { label: "PAGO REGISTRADO", icon: "fa-credit-card" },
-        "CERRADO": { label: "RESUELTO / FINALIZADO", icon: "fa-circle-check" },
-        "ANULADO": { label: "RECHAZADO / OBSERVADO", icon: "fa-circle-xmark" }
-      };
-
       resultBox.innerHTML = resultados.map(request => {
-        const meta = statusLabels[request.status] || { label: request.status, icon: 'fa-circle-question' };
+        const meta = TupaUtils.getStatusMeta(request.status);
         const statusClass = request.status.toLowerCase().replace(/ /g, "_");
         const apellidos = [request.apellidoPaterno, request.apellidoMaterno].filter(Boolean).join(' ');
 

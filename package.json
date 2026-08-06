@@ -9,7 +9,17 @@
     "db:import": "node backend/src/scripts/importDump.js",
     "db:migrate": "node backend/src/scripts/migrate.js",
     "db:seed": "node backend/src/scripts/seedDemoUsers.js",
-    "setup": "npm run db:import && npm run db:migrate && npm run db:seed"
+    "setup": "npm run db:import && npm run db:migrate && npm run db:seed",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:backend": "jest tests/backend",
+    "test:frontend": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/frontend"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testTimeout": 30000,
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -22,5 +32,9 @@
     "mysql2": "^3.11.0",
     "pdf-parse": "^1.1.1",
     "puppeteer-core": "^25.1.0"
+  },
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2"
   }
 }
